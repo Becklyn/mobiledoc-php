@@ -82,4 +82,14 @@ class RichTextRendererTest extends TestCase
         $renderer = new MobiledocRenderer(new ExtensionRegistry());
         self::assertSame($expectedResult, (string) $renderer->render($mobiledoc));
     }
+
+
+    /**
+     *
+     */
+    public function testEmptyRendering ()
+    {
+        $renderer = new MobiledocRenderer(new ExtensionRegistry());
+        self::assertNull($renderer->render(null));
+    }
 }
