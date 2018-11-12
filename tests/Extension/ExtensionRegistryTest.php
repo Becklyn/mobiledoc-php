@@ -26,4 +26,17 @@ class ExtensionRegistryTest extends TestCase
         $registry = new ExtensionRegistry([$extension]);
         self::assertSame($extension, $registry->getExtension("test"));
     }
+
+
+    /**
+     * @expectedException Becklyn\Mobiledoc\Exception\DuplicateExtensionMobiledocException
+     */
+    public function testDuplicateRegistration ()
+    {
+        $extension = new TestExtension();
+        $registry = new ExtensionRegistry();
+
+        $registry->registerExtension($extension);
+        $registry->registerExtension($extension);
+    }
 }
