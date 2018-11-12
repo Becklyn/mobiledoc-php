@@ -67,6 +67,42 @@ class RichTextRendererTest extends TestCase
                 ],
                 '<p><a href="https://becklyn.com" target="_blank">link</a></p>',
             ],
+            "list ul" => [
+                [
+                    "sections" => [
+                        [3, "ul", [
+                            [
+                                [0, [], 0, "first"],
+                            ],
+                            [
+                                [0, [], 0, "second"],
+                            ],
+                            [
+                                [0, [], 0, "last"],
+                            ],
+                        ]]
+                    ],
+                ],
+                '<ul><li>first</li><li>second</li><li>last</li></ul>',
+            ],
+            "list ol" => [
+                [
+                    "sections" => [
+                        [3, "ol", [
+                            [
+                                [0, [], 0, "first"],
+                            ],
+                            [
+                                [0, [], 0, "second"],
+                            ],
+                            [
+                                [0, [], 0, "last"],
+                            ],
+                        ]]
+                    ],
+                ],
+                '<ol><li>first</li><li>second</li><li>last</li></ol>',
+            ],
         ];
     }
 
