@@ -103,6 +103,50 @@ class RichTextRendererTest extends TestCase
                 ],
                 '<ol><li>first</li><li>second</li><li>last</li></ol>',
             ],
+            "all markup" => [
+                [
+                    "markups" => [
+                        ["a", ["href", "link"]],
+                        ["b"],
+                        ["code"],
+                        ["em"],
+                        ["i"],
+                        ["s"],
+                        ["strong"],
+                        ["sub"],
+                        ["sup"],
+                        ["u"],
+                    ],
+                    "sections" => [
+                        [1, "p", [
+                            [0, [0], 1, "a"],
+                            [0, [1], 1, "b"],
+                            [0, [2], 1, "code"],
+                            [0, [3], 1, "em"],
+                            [0, [4], 1, "i"],
+                            [0, [5], 1, "s"],
+                            [0, [6], 1, "strong"],
+                            [0, [7], 1, "sub"],
+                            [0, [8], 1, "sup"],
+                            [0, [9], 1, "u"],
+                        ]]
+                    ],
+                ],
+                \implode("", [
+                    '<p>',
+                    '<a href="link">a</a>',
+                    '<b>b</b>',
+                    '<code>code</code>',
+                    '<em>em</em>',
+                    '<i>i</i>',
+                    '<s>s</s>',
+                    '<strong>strong</strong>',
+                    '<sub>sub</sub>',
+                    '<sup>sup</sup>',
+                    '<u>u</u>',
+                    '</p>',
+                ]),
+            ],
         ];
     }
 
