@@ -3,6 +3,7 @@
 namespace Tests\Becklyn\Mobiledoc\Renderer;
 
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
+use Becklyn\Mobiledoc\Extension\RichTextExtensionInterface;
 use Becklyn\Mobiledoc\Renderer\MobiledocRenderer;
 use Becklyn\Mobiledoc\tests\Fixtures\ExampleAtom;
 use Becklyn\Mobiledoc\tests\Fixtures\IframeCard;
@@ -283,5 +284,55 @@ class RichTextRendererTest extends TestCase
                 ],
             ])
         );
+    }
+
+
+    /**
+     * Tests that the payloads are correctly passed into the extensions
+     */
+    public function testPayloads ()
+    {
+        $atom = $this->getMockBuilder(RichTextExtensionInterface::class)
+            ->getMock();
+
+        $atom
+            ->expects(self::once())
+            ->method("getName")
+            ->willReturn("atom");
+
+        $atom
+            ->expects(self::once())
+            ->method("render")
+            ->with("text content", ["payload" => "of atom"]);
+
+        $card = $this->getMockBuilder(RichTextExtensionInterface::class)
+            ->getMock();
+
+        $card
+            ->expects(self::once())
+            ->method("getName")
+            ->willReturn("card");
+
+        $card
+            ->expects(self::once())
+            ->method("render")
+            ->with(null, ["payload" => "of card"]);
+
+
+        $renderer = new MobiledocRenderer(new ExtensionRegistry([$atom, $card]));
+        $renderer->render([
+            "atoms" => [
+                ["atom", "text content", ["payload" => "of atom"]],
+            ],
+            "cards" => [
+                ["card", ["payload" => "of card"]],
+            ],
+            "sections" => [
+                [1, "p", [
+                    [1, [], 0, 0],
+                ]],
+                [10, 0],
+            ],
+        ]);
     }
 }

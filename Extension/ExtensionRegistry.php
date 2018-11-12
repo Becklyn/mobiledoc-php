@@ -33,12 +33,14 @@ class ExtensionRegistry
      */
     public function registerExtension (RichTextExtensionInterface $extension) : void
     {
-        if (isset($this->extensions[$extension->getName()]))
+        $name = $extension->getName();
+
+        if (isset($this->extensions[$name]))
         {
-            throw new DuplicateExtensionMobiledocException($extension->getName());
+            throw new DuplicateExtensionMobiledocException($name);
         }
 
-        $this->extensions[$extension->getName()] = $extension;
+        $this->extensions[$name] = $extension;
     }
 
 
