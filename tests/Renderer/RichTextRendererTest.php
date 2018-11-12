@@ -4,6 +4,8 @@ namespace Tests\Becklyn\Mobiledoc\Renderer;
 
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 use Becklyn\Mobiledoc\Renderer\MobiledocRenderer;
+use Becklyn\Mobiledoc\tests\Fixtures\ExampleAtom;
+use Becklyn\Mobiledoc\tests\Fixtures\IframeCard;
 use PHPUnit\Framework\TestCase;
 
 
@@ -179,5 +181,107 @@ class RichTextRendererTest extends TestCase
     {
         $renderer = new MobiledocRenderer(new ExtensionRegistry());
         self::assertNull($renderer->render(null));
+    }
+
+
+    /**
+     * Tests rendering an existing atom
+     */
+    public function testAtomRendering ()
+    {
+        $atom = new ExampleAtom();
+        $renderer = new MobiledocRenderer(new ExtensionRegistry([$atom]));
+
+        self::assertSame(
+            '<p><span class="example-atom" title="my title">content</span></p>',
+            (string) $renderer->render([
+                "atoms" => [
+                    ["example-atom", "content", ["title" => "my title"]],
+                ],
+                "sections" => [
+                    [1, "p", [
+                        [1, [], 0, 0],
+                    ]],
+                ],
+            ])
+        );
+    }
+
+
+    /**
+     * Tests rendering a missing atom – with fallback to just the text content
+     */
+    public function testMissingAtomRendering ()
+    {
+        $renderer = new MobiledocRenderer(new ExtensionRegistry());
+
+        self::assertSame(
+            '<p>content</p>',
+            (string) $renderer->render([
+                "atoms" => [
+                    ["example-atom", "content", ["title" => "my title"]],
+                ],
+                "sections" => [
+                    [1, "p", [
+                        [1, [], 0, 0],
+                    ]],
+                ],
+            ])
+        );
+    }
+
+
+    /**
+     * Tests that cards are correctly rendered
+     */
+    public function testCardRendering ()
+    {
+        $card = new IframeCard();
+        $renderer = new MobiledocRenderer(new ExtensionRegistry([$card]));
+
+        self::assertSame(
+            '<p>before</p><iframe src="https://becklyn.com"></iframe><p>after</p>',
+            (string) $renderer->render([
+                "cards" => [
+                    ["iframe", ["src" => "https://becklyn.com"]],
+                ],
+                "sections" => [
+                    [1, "p", [
+                        [0, [], 0, "before"],
+                    ]],
+                    [10, 0],
+                    [1, "p", [
+                        [0, [], 0, "after"],
+                    ]],
+                ],
+            ])
+        );
+    }
+
+
+    /**
+     * Tests that missing cards are just not rendered
+     */
+    public function testMissingCardRendering ()
+    {
+        $renderer = new MobiledocRenderer(new ExtensionRegistry());
+
+        self::assertSame(
+            '<p>before</p><p>after</p>',
+            (string) $renderer->render([
+                "cards" => [
+                    ["missing", ["some" => "data"]],
+                ],
+                "sections" => [
+                    [1, "p", [
+                        [0, [], 0, "before"],
+                    ]],
+                    [10, 0],
+                    [1, "p", [
+                        [0, [], 0, "after"],
+                    ]],
+                ],
+            ])
+        );
     }
 }
