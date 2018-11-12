@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Becklyn\Mobiledoc\Document;
+namespace Becklyn\Mobiledoc\Mobiledoc;
 
 /**
  * A document in both representations

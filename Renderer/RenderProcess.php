@@ -2,7 +2,7 @@
 
 namespace Becklyn\Mobiledoc\Renderer;
 
-use Becklyn\Mobiledoc\Document\Document;
+use Becklyn\Mobiledoc\Mobiledoc\Document;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 
 
