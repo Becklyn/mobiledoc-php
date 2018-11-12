@@ -1,0 +1,28 @@
+{
+    "name": "becklyn/mobiledoc",
+    "description": "A PHP-based renderer for the mobiledoc format.",
+    "type": "library",
+    "homepage": "https://github.com/Becklyn/mobiledoc-php",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Becklyn Studios",
+            "homepage": "https://becklyn.com/"
+        }
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "becklyn/php-cs": "^1.0.9"
+    },
+    "autoload": {
+        "psr-4": {"Becklyn\\Mobiledoc\\": ""}
+    },
+    "autoload-dev": {
+        "psr-4": {"Tests\\Becklyn\\Mobiledoc\\": "tests/"}
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
