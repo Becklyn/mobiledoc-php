@@ -147,6 +147,14 @@ class RichTextRendererTest extends TestCase
                     '</p>',
                 ]),
             ],
+            "image section" => [
+                [
+                    "sections" => [
+                        [2, "https://becklyn.com/example.png"],
+                    ],
+                ],
+                '<img src="https://becklyn.com/example.png" alt="">',
+            ]
         ];
     }
 

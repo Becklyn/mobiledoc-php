@@ -63,6 +63,10 @@ class RenderProcess
                     $result[] = $this->renderTextSection($section[1], $section[2]);
                     break;
 
+                case 2:
+                    $result[] = $this->renderImageSection($section[1]);
+                    break;
+
                 case 3:
                     $result[] = $this->renderListSection($section[1], $section[2]);
                     break;
@@ -87,6 +91,16 @@ class RenderProcess
     private function renderTextSection (string $tagName, array $markers) : string
     {
         return "<{$tagName}>" . $this->renderMarkers($markers) . "</{$tagName}>";
+    }
+
+
+    /**
+     * @param string $src
+     * @return string
+     */
+    private function renderImageSection (string $src) : string
+    {
+        return '<img src="' . $src . '" alt="">';
     }
 
 
