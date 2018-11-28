@@ -16,7 +16,7 @@ class MarkupSection implements Section
     /**
      * @var Marker[]
      */
-    private $markers;
+    private $markers = [];
 
 
     /**
