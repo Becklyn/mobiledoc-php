@@ -59,14 +59,14 @@ class HtmlParser
         $this->logger = new ParseLogger();
         // endregion
 
-        //region Check for empty content and skip the processing
+        // region Check for empty content and skip the processing
         $html = \trim($html);
 
         if ("" === $html)
         {
             return;
         }
-        //endregion
+        // endregion
 
         // region Element Parsers
         \array_unshift(
