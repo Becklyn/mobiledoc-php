@@ -11,14 +11,15 @@ use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 class BlockParser implements ElementParser
 {
     private const VALID_TAG_NAMES = [
-        "h1" => true,
-        "h2" => true,
-        "h3" => true,
-        "h4" => true,
-        "h5" => true,
-        "h6" => true,
-        "p" => true,
-        "blockquote" => true,
+        "h1" => "h1",
+        "h2" => "h2",
+        "h3" => "h3",
+        "h4" => "h4",
+        "h5" => "h5",
+        "h6" => "h6",
+        "p" => "p",
+        "blockquote" => "blockquote",
+        "div" => "p",
     ];
 
 
@@ -44,7 +45,8 @@ class BlockParser implements ElementParser
      */
     public function parse (HtmlNode $node) : array
     {
-        $section = new MarkupSection($node->getTagName());
+        $resolvedTagName = self::VALID_TAG_NAMES[$node->getTagName()];
+        $section = new MarkupSection($resolvedTagName);
 
         foreach ($node->getChildren() as $child)
         {
@@ -69,6 +71,6 @@ class BlockParser implements ElementParser
             return false;
         }
 
-        return self::VALID_TAG_NAMES[$node->getTagName()] ?? false;
+        return isset(self::VALID_TAG_NAMES[$node->getTagName()]);
     }
 }
