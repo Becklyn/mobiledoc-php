@@ -33,7 +33,7 @@ class HtmlParserTest extends TestCase
             yield [
                 $html,
                 $mobiledoc,
-                \basename($mobiledocFile, \pathinfo($mobiledocFile, \PATHINFO_EXTENSION)),
+                \basename($mobiledocFile, "." . \pathinfo($mobiledocFile, \PATHINFO_EXTENSION)),
             ];
         }
     }
@@ -65,7 +65,7 @@ class HtmlParserTest extends TestCase
         {
             yield [
                 \file_get_contents($htmlFile),
-                \basename($htmlFile, \pathinfo($htmlFile, \PATHINFO_EXTENSION)),
+                \basename($htmlFile, "." . \pathinfo($htmlFile, \PATHINFO_EXTENSION)),
             ];
         }
     }
