@@ -9,6 +9,9 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 
 class Document
 {
+    /**
+     * @var Section[]
+     */
     private $sections = [];
 
     /**
@@ -40,8 +43,18 @@ class Document
     /**
      * @return Section[]
      */
-    public function getSections () : array
+    public function getNonEmptySections () : array
     {
-        return $this->sections;
+        $nonEmpty = [];
+
+        foreach ($this->sections as $section)
+        {
+            if (!$section->isEmpty())
+            {
+                $nonEmpty[] = $section;
+            }
+        }
+
+        return $nonEmpty;
     }
 }

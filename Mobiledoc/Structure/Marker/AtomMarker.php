@@ -49,4 +49,14 @@ class AtomMarker extends Marker
     {
         return $this->payload;
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty () : bool
+    {
+        // an atom is never empty
+        return false;
+    }
 }

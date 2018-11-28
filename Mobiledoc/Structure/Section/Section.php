@@ -7,5 +7,10 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\ContentElement;
 
 interface Section extends ContentElement
 {
-
+    /**
+     * Returns whether the section is empty
+     *
+     * @return bool
+     */
+    public function isEmpty () : bool;
 }

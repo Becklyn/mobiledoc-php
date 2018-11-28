@@ -82,4 +82,13 @@ abstract class Marker implements ContentElement
     {
         $this->closingTags += 1;
     }
+
+
+    /**
+     * @return bool
+     */
+    public function isEmpty () : bool
+    {
+        return "" === trim($this->text);
+    }
 }

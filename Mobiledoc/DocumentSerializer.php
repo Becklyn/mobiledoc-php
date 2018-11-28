@@ -7,8 +7,12 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\TextMarker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\CardSection;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\ListSection;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\MarkupSection;
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 
 
+/**
+ * Serializes a mobiledoc document
+ */
 class DocumentSerializer
 {
     private $version = "0.3.1";
@@ -18,11 +22,11 @@ class DocumentSerializer
     private $sections = [];
 
     /**
-     * @param Document $document
+     * @param Section[] $sections
      */
-    public function __construct (Document $document)
+    public function __construct (array $sections)
     {
-        $this->sections = $this->serializeList($document->getSections());
+        $this->sections = $this->serializeList($sections);
     }
 
 

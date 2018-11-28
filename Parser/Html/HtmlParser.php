@@ -184,7 +184,8 @@ class HtmlParser
             return new ParseResult(null, $this->logger->getMessages());
         }
 
-        $serializer = new DocumentSerializer($this->mobiledoc);
+        // only serialize the non-empty sections, as they don't add anything to the HTML
+        $serializer = new DocumentSerializer($this->mobiledoc->getNonEmptySections());
         return new ParseResult($serializer->serialize(), $this->logger->getMessages());
     }
 }

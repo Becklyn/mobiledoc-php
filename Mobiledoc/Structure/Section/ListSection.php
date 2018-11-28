@@ -10,6 +10,8 @@ class ListSection implements Section
      */
     private $tagName;
 
+    private $listItems = [];
+
 
     public function __construct (string $tagName)
     {
@@ -23,5 +25,14 @@ class ListSection implements Section
     public function getTagName () : string
     {
         return $this->tagName;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty () : bool
+    {
+        return empty($this->listItems);
     }
 }

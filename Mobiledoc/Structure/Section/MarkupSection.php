@@ -62,4 +62,21 @@ class MarkupSection implements Section
     {
         return $this->markers;
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty () : bool
+    {
+        foreach ($this->markers as $marker)
+        {
+            if (!$marker->isEmpty())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

@@ -44,4 +44,13 @@ class CardSection implements Section
     {
         return $this->payload;
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty () : bool
+    {
+        return false;
+    }
 }
