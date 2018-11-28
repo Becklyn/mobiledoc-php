@@ -2,8 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Parser\Html\ElementParser;
 
-
-use Becklyn\Mobiledoc\Exception\ParseException;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\TextMarker;
 use Becklyn\Mobiledoc\Parser\Html\HtmlNodeParser;
@@ -46,12 +44,6 @@ class InlineParser implements ElementParserInterface
         // parse children
         foreach ($node->getChildren() as $child)
         {
-            // if it is an element, that may not occur here, throw an error
-            if (!$this->supports($child))
-            {
-                throw new ParseException(sprintf("Can't inline parse nested element: %s", $child->getDebugLabel()));
-            }
-
             // valid nested element, so continue parsing
             foreach ($nodeParser->parseInline($child) as $childMarker)
             {
