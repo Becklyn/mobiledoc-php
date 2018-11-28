@@ -6,12 +6,13 @@ namespace Becklyn\Mobiledoc\Parser\Html\ElementParser;
 use Becklyn\Mobiledoc\Exception\ParseException;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\TextMarker;
+use Becklyn\Mobiledoc\Parser\Html\HtmlNodeParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\ElementNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\TextNode;
 
 
-class InlineParser implements ElementParser
+class InlineParser implements ElementParserInterface
 {
     private const VALID_TAG_NAMES = [
         "b" => true,
@@ -28,10 +29,8 @@ class InlineParser implements ElementParser
 
     /**
      * @inheritDoc
-     *
-     * @param HtmlNode $node
      */
-    public function parse (HtmlNode $node) : array
+    public function parse (HtmlNode $node, HtmlNodeParser $nodeParser) : array
     {
         if ($node instanceof TextNode)
         {
@@ -54,7 +53,7 @@ class InlineParser implements ElementParser
             }
 
             // valid nested element, so continue parsing
-            foreach ($this->parse($child) as $childMarker)
+            foreach ($nodeParser->parseInline($child) as $childMarker)
             {
                 $children[] = $childMarker;
             }

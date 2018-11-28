@@ -5,12 +5,9 @@ namespace Becklyn\Mobiledoc\Parser\Html;
 use Becklyn\Mobiledoc\Exception\ParseException;
 use Becklyn\Mobiledoc\Mobiledoc\Document;
 use Becklyn\Mobiledoc\Mobiledoc\DocumentSerializer;
-use Becklyn\Mobiledoc\Mobiledoc\Structure\ContentElement;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
-use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\TextMarker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\BlockParser;
-use Becklyn\Mobiledoc\Parser\Html\ElementParser\ElementParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\InlineParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LineBreakParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LinkParser;
@@ -39,9 +36,9 @@ class HtmlParser
     private $logger;
 
     /**
-     * @var ElementParser[]
+     * @var HtmlNodeParser
      */
-    private $elementParsers = [];
+    private $nodeParser;
 
 
     /**
@@ -51,8 +48,8 @@ class HtmlParser
 
 
     /**
-     * @param string $html
-     * @param ElementParser[] $additionalParsers
+     * @param string           $html
+     * @param HtmlNodeParser[] $additionalParsers
      */
     public function __construct (string $html, array $additionalParsers = [])
     {
@@ -65,10 +62,7 @@ class HtmlParser
             new LinkParser()
         );
 
-        foreach ($additionalParsers as $parser)
-        {
-            $this->registerElementParser($parser);
-        }
+        $this->nodeParser = new HtmlNodeParser($additionalParsers);
         // endregion
 
         // region Prepare Instance Variables
@@ -105,17 +99,6 @@ class HtmlParser
 
 
     /**
-     * Registers a new element parser
-     *
-     * @param ElementParser $parser
-     */
-    private function registerElementParser (ElementParser $parser) : void
-    {
-        $this->elementParsers[] = $parser;
-    }
-
-
-    /**
      * Parses the root node
      *
      * @param \DOMElement $root
@@ -135,24 +118,8 @@ class HtmlParser
     {
         foreach ($nodes as $node)
         {
-            $contentElements = null;
-
             // parse node
-            foreach ($this->elementParsers as $parser)
-            {
-                if ($parser->supports($node))
-                {
-                    $contentElements = $parser->parse($node);
-                    break;
-                }
-            }
-
-            // if the element is still null, no parser supports this type of node
-            if (null === $contentElements)
-            {
-                $this->logger->log("Encountered unparsable HTML node '%s'", $node->getDebugLabel());
-                continue;
-            }
+            $contentElements = $this->nodeParser->parse($node);
 
             // append parsed elements to document
             foreach ($contentElements as $contentElement)

@@ -3,18 +3,20 @@
 namespace Becklyn\Mobiledoc\Parser\Html\ElementParser;
 
 use Becklyn\Mobiledoc\Mobiledoc\Structure\ContentElement;
+use Becklyn\Mobiledoc\Parser\Html\HtmlNodeParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 
 
-interface ElementParser
+interface ElementParserInterface
 {
     /**
      * Parses the given element into content elements
      *
-     * @param HtmlNode $node
+     * @param HtmlNode       $node
+     * @param HtmlNodeParser $nodeParser
      * @return ContentElement[]
      */
-    public function parse (HtmlNode $node) : array;
+    public function parse (HtmlNode $node, HtmlNodeParser $nodeParser) : array;
 
 
     /**

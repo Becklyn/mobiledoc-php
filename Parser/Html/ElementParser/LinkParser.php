@@ -4,19 +4,20 @@ namespace Becklyn\Mobiledoc\Parser\Html\ElementParser;
 
 use Becklyn\Mobiledoc\Exception\ParseException;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\AtomMarker;
+use Becklyn\Mobiledoc\Parser\Html\HtmlNodeParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\ElementNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\TextNode;
 
 
-class LinkParser implements ElementParser
+class LinkParser implements ElementParserInterface
 {
     /**
      * @inheritDoc
      *
      * @param ElementNode $node
      */
-    public function parse (HtmlNode $node) : array
+    public function parse (HtmlNode $node, HtmlNodeParser $nodeParser) : array
     {
         $children = $node->getChildren();
 
