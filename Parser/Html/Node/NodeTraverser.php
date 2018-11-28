@@ -52,7 +52,7 @@ class NodeTraverser
 
             if (!$child instanceof \DOMElement)
             {
-                throw new ParseException(\sprintf("Encountered unexpected DOM node of type '%s'.", \get_class($child)));
+                throw new ParseException(\sprintf("Encountered unexpected DOM node of type '%s'.", \get_class($child)), $child);
             }
 
             $children[] = new ElementNode($child);

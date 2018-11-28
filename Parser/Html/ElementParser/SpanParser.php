@@ -23,7 +23,7 @@ class SpanParser implements ElementParserInterface
 
         foreach ($node->getChildren() as $child)
         {
-            foreach ($nodeParser->parseInline($child) as $nested)
+            foreach ($nodeParser->parseInline($child, $node) as $nested)
             {
                 $elements[] = $nested;
             }

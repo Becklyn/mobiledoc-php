@@ -39,7 +39,7 @@ class ListParser implements ElementParserInterface
     {
         if (!$node instanceof ElementNode)
         {
-            throw new ParseException("Can't parse text nodes directly inside of lists.");
+            throw new ParseException("Can't parse text nodes directly inside of lists.", $node);
         }
 
         if ("li" !== $node->getTagName())
@@ -47,14 +47,14 @@ class ListParser implements ElementParserInterface
             throw new ParseException(\sprintf(
                 "Can't parse element <%s> directly inside of lists.",
                 $node->getTagName()
-            ));
+            ), $node);
         }
 
         $items = [];
 
         foreach ($node->getChildren() as $listItemChild)
         {
-            foreach ($nodeParser->parseInline($listItemChild) as $nestedItem)
+            foreach ($nodeParser->parseInline($listItemChild, $node) as $nestedItem)
             {
                 $items[] = $nestedItem;
             }

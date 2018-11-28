@@ -31,7 +31,7 @@ class LinkParser implements ElementParserInterface
 
         if (count($children) > 1 || !$content instanceof TextNode)
         {
-            throw new ParseException("Can't parse link with nested elements.");
+            throw new ParseException("Can't parse link with nested elements.", $node);
         }
 
         $domNode = $node->getElement();

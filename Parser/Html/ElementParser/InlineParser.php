@@ -45,7 +45,7 @@ class InlineParser implements ElementParserInterface
         foreach ($node->getChildren() as $child)
         {
             // valid nested element, so continue parsing
-            foreach ($nodeParser->parseInline($child) as $childMarker)
+            foreach ($nodeParser->parseInline($child, $node) as $childMarker)
             {
                 $children[] = $childMarker;
             }
