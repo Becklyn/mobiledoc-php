@@ -44,15 +44,15 @@ class HtmlParserTest extends TestCase
      *
      * @param string $html
      * @param array  $expectedMobileDoc
-     * @param string $message
+     * @param string $file
      */
-    public function testParsingValid (string $html, array $expectedMobileDoc, string $message) : void
+    public function testParsingValid (string $html, array $expectedMobileDoc, string $file) : void
     {
         $parser = new HtmlParser($html);
         $result = $parser->getResult();
 
-        self::assertEquals([], $result->getLogMessages(), $message);
-        self::assertArraySubset($expectedMobileDoc, $result->getMobiledoc(), false, $message);
+        self::assertEquals([], $result->getLogMessages(), $file);
+        self::assertArraySubset($expectedMobileDoc, $result->getMobiledoc(), false, $file);
     }
 
 
@@ -75,14 +75,14 @@ class HtmlParserTest extends TestCase
      * @dataProvider provideParsingInvalid
      *
      * @param string $html
-     * @param string $message
+     * @param string $file
      */
-    public function testParsingInvalid (string $html, string $message) : void
+    public function testParsingInvalid (string $html, string $file) : void
     {
         $parser = new HtmlParser($html);
         $result = $parser->getResult();
 
-        self::assertNull($result->getMobiledoc(), $message);
-        self::assertNotEquals([], $result->getLogMessages(), $message);
+        self::assertNull($result->getMobiledoc(), $file);
+        self::assertNotEquals([], $result->getLogMessages(), $file);
     }
 }
