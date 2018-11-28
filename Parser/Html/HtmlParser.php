@@ -9,6 +9,7 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\TextMarker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\BlockParser;
+use Becklyn\Mobiledoc\Parser\Html\ElementParser\DivParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\InlineParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LineBreakParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LinkParser;
@@ -91,7 +92,8 @@ class HtmlParser
             new LineBreakParser(),
             new LinkParser(),
             new SpanParser(),
-            new ListParser()
+            new ListParser(),
+            new DivParser()
         );
 
         $this->nodeParser = new HtmlNodeParser($additionalParsers);

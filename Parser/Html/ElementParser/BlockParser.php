@@ -19,7 +19,6 @@ class BlockParser implements ElementParserInterface
         "h6" => "h6",
         "p" => "p",
         "blockquote" => "blockquote",
-        "div" => "p",
     ];
 
 
@@ -35,7 +34,7 @@ class BlockParser implements ElementParserInterface
 
         foreach ($node->getChildren() as $child)
         {
-            foreach ($nodeParser->parseInline($child) as $marker)
+            foreach ($nodeParser->parseInline($child, $node) as $marker)
             {
                 $section->append($marker);
             }
