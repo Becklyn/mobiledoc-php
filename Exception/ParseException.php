@@ -10,6 +10,12 @@ use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 class ParseException extends MobiledocException
 {
     /**
+     * @var HtmlNode|\DOMElement|\DOMNode|null
+     */
+    private $node;
+
+
+    /**
      *
      * @param string                    $message
      * @param null|HtmlNode|\DOMNode    $node
@@ -17,6 +23,20 @@ class ParseException extends MobiledocException
      */
     public function __construct (string $message, $node = null, ?\Throwable $throwable = null)
     {
+        parent::__construct($message, $throwable);
+        $this->node = $node;
+        $this->message = $message;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getFullMessage () : string
+    {
+        $message = $this->message;
+        $node = $this->node;
+
         if ($node instanceof ElementNode)
         {
             $node = $node->getElement();
@@ -27,6 +47,6 @@ class ParseException extends MobiledocException
             $message .= " In HTML: '{$node->ownerDocument->saveHTML($node)}'";
         }
 
-        parent::__construct($message, $throwable);
+        return $message;
     }
 }
