@@ -52,15 +52,16 @@ class HtmlNodeParser
             }
         }
 
-        throw new ParseException(\sprintf("Can't parse node of type: %s", $node->getDebugLabel()));
+        throw new ParseException(\sprintf("Can't parse node of type: %s", $node->getDebugLabel()), $node);
     }
 
 
     /**
-     * @param HtmlNode $node
+     * @param HtmlNode      $node
+     * @param HtmlNode|null $context    optional: the context of the node
      * @return Marker[]
      */
-    public function parseInline (HtmlNode $node) : array
+    public function parseInline (HtmlNode $node, ?HtmlNode $context = null) : array
     {
         $result = $this->parse($node);
 
@@ -72,7 +73,7 @@ class HtmlNodeParser
                     "Can't parse node inline, as a content element of type '%s' was found inside of: %s",
                     \get_class($element),
                     $node->getDebugLabel()
-                ));
+                ), $context);
             }
         }
 
