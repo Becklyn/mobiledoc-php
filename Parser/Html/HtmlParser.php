@@ -85,7 +85,7 @@ class HtmlParser
         // region Parse
         try
         {
-            if (null !== $root || !$root instanceof \DOMElement)
+            if (null !== $root && $root instanceof \DOMElement)
             {
                 $this->parseRoot($root);
             }
