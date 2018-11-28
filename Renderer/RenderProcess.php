@@ -2,7 +2,8 @@
 
 namespace Becklyn\Mobiledoc\Renderer;
 
-use Becklyn\Mobiledoc\Mobiledoc\Document;
+use Becklyn\Mobiledoc\Mobiledoc\MobiledocConstants;
+use Becklyn\Mobiledoc\Mobiledoc\SimpleDocument;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 
 
@@ -59,19 +60,19 @@ class RenderProcess
         {
             switch ($section[0])
             {
-                case 1:
+                case MobiledocConstants::MARKUP_SECTION:
                     $result[] = $this->renderTextSection($section[1], $section[2]);
                     break;
 
-                case 2:
+                case MobiledocConstants::IMAGE_SECTION:
                     $result[] = $this->renderImageSection($section[1]);
                     break;
 
-                case 3:
+                case MobiledocConstants::LIST_SECTION:
                     $result[] = $this->renderListSection($section[1], $section[2]);
                     break;
 
-                case 10:
+                case MobiledocConstants::CARD_SECTION:
                     $result[] = $this->renderCardSection($section[1]);
                     break;
             }
@@ -263,10 +264,10 @@ class RenderProcess
 
 
     /**
-     * @return Document
+     * @return SimpleDocument
      */
-    public function getRenderedDocument () : Document
+    public function getRenderedDocument () : SimpleDocument
     {
-        return new Document($this->mobiledoc, $this->text);
+        return new SimpleDocument($this->mobiledoc, $this->text);
     }
 }

@@ -1,0 +1,20 @@
+{
+    "atoms": [
+        ["link", "Company Name", {"label":  "Company Name", "url": "http://www.example.org/", "inNewWindow": true}],
+        ["br", "", []],
+        ["br", "", []]
+    ],
+    "sections": [
+        [1, "h3", [
+            [0, [], 0, "More information:"]
+        ]],
+        [1, "p", [
+            [0, [], 0, "\n"],
+            [1, [], 0, 0],
+            [1, [], 0, 1],
+            [0, [], 0, "\nStreet name 1"],
+            [1, [], 0, 2],
+            [0, [], 0, "\n12345 City"]
+        ]]
+    ]
+}

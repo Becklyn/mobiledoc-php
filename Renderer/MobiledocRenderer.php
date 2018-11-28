@@ -2,7 +2,7 @@
 
 namespace Becklyn\Mobiledoc\Renderer;
 
-use Becklyn\Mobiledoc\Mobiledoc\Document;
+use Becklyn\Mobiledoc\Mobiledoc\SimpleDocument;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 
 
@@ -27,9 +27,9 @@ class MobiledocRenderer
      * Renders the given mobiledoc to a document
      *
      * @param array|null $mobiledoc
-     * @return Document|null
+     * @return SimpleDocument|null
      */
-    public function render (?array $mobiledoc) : ?Document
+    public function render (?array $mobiledoc) : ?SimpleDocument
     {
         if (null === $mobiledoc)
         {

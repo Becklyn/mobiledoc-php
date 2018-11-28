@@ -2,54 +2,46 @@
 
 namespace Becklyn\Mobiledoc\Mobiledoc;
 
-/**
- * A document in both representations
- */
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\MarkupSection;
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
+
+
 class Document
 {
-    /**
-     * @var array
-     */
-    private $mobiledoc;
-
+    private $sections = [];
 
     /**
-     * @var string
+     * @param Section $section
      */
-    private $html;
-
-
-    /**
-     * @param array  $mobiledoc
-     * @param string $html
-     */
-    public function __construct (array $mobiledoc, string $html)
+    public function appendSection (Section $section)
     {
-        $this->mobiledoc = $mobiledoc;
-        $this->html = $html;
+        $this->sections[] = $section;
     }
 
 
     /**
-     * @return array
+     * @param Marker $marker
      */
-    public function getMobiledoc () : array
+    public function appendToLastParagraph (Marker $marker) : void
     {
-        return $this->mobiledoc;
+        $lastSection = \end($this->sections);
+
+        if (!$lastSection instanceof MarkupSection || !$lastSection->isParagraph())
+        {
+            $lastSection = new MarkupSection("p");
+            $this->appendSection($lastSection);
+        }
+
+        $lastSection->append($marker);
     }
 
 
     /**
-     * @return string
+     * @return Section[]
      */
-    public function getHtml () : string
+    public function getSections () : array
     {
-        return $this->html;
-    }
-
-
-    public function __toString ()
-    {
-        return $this->html;
+        return $this->sections;
     }
 }
