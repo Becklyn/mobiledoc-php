@@ -13,6 +13,7 @@ use Becklyn\Mobiledoc\Parser\Html\ElementParser\InlineParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LineBreakParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LinkParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\SpanParser;
+use Becklyn\Mobiledoc\Parser\Html\ElementParser\TextParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\NodeTraverser;
 use Becklyn\Mobiledoc\Parser\ParseLogger;
@@ -83,6 +84,7 @@ class HtmlParser
         // region Element Parsers
         \array_unshift(
             $additionalParsers,
+            new TextParser(),
             new InlineParser(),
             new BlockParser(),
             new LineBreakParser(),

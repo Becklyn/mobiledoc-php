@@ -71,10 +71,9 @@ class InlineParser implements ElementParserInterface
      */
     public function supports (HtmlNode $node) : bool
     {
-        // Text nodes can be parsed
-        if ($node instanceof TextNode)
+        if (!$node instanceof ElementNode)
         {
-            return true;
+            return false;
         }
 
         /** @var ElementNode $node */
