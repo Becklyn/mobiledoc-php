@@ -52,23 +52,37 @@ class HtmlParser
 
     /**
      * @param string $html
+     * @param ElementParser[] $additionalParsers
      */
-    public function __construct (string $html)
+    public function __construct (string $html, array $additionalParsers = [])
     {
-        $this->mobiledoc = new Document();
-        $this->logger = new ParseLogger();
-
-        $this->elementParsers = [
+        // region Element Parsers
+        \array_unshift(
+            $additionalParsers,
             new InlineParser(),
             new BlockParser(),
             new LineBreakParser(),
-            new LinkParser(),
-        ];
+            new LinkParser()
+        );
 
+        foreach ($additionalParsers as $parser)
+        {
+            $this->registerElementParser($parser);
+        }
+        // endregion
+
+        // region Prepare Instance Variables
+        $this->mobiledoc = new Document();
+        $this->logger = new ParseLogger();
+        // endregion
+
+        // region Prepare HTML Element
         $html5 = new HTML5();
         $this->domDocument = $html5->parse(\trim($html));
         $root = $this->domDocument->getElementsByTagName("html")[0] ?? null;
+        // endregion
 
+        // region Parse
         try
         {
             if (null !== $root || !$root instanceof \DOMElement)
@@ -86,6 +100,18 @@ class HtmlParser
             $this->failed = true;
             $this->logger->log("Parsing failed due to exception: %s", $exception->getMessage());
         }
+        // endregion
+    }
+
+
+    /**
+     * Registers a new element parser
+     *
+     * @param ElementParser $parser
+     */
+    private function registerElementParser (ElementParser $parser) : void
+    {
+        $this->elementParsers[] = $parser;
     }
 
 
