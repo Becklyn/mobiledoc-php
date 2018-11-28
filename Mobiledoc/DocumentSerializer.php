@@ -229,9 +229,16 @@ class DocumentSerializer
      */
     public function serialize () : array
     {
+        $markups = [];
+
+        foreach ($this->markups as $tag => $index)
+        {
+            $markups[] = [$tag];
+        }
+
         return [
             "version" => $this->version,
-            "markups" => $this->markups,
+            "markups" => $markups,
             "atoms" => $this->atoms,
             "cards" => $this->cards,
             "sections" => $this->sections,
