@@ -30,7 +30,11 @@ class HtmlParserTest extends TestCase
                 throw new \RuntimeException(sprintf("Can't parse mobiledoc for test case: '%s'", $mobiledocFile));
             }
 
-            yield [$html, $mobiledoc];
+            yield [
+                $html,
+                $mobiledoc,
+                \basename($mobiledocFile, \pathinfo($mobiledocFile, \PATHINFO_EXTENSION)),
+            ];
         }
     }
 
@@ -40,14 +44,15 @@ class HtmlParserTest extends TestCase
      *
      * @param string $html
      * @param array  $expectedMobileDoc
+     * @param string $message
      */
-    public function testParsingValid (string $html, array $expectedMobileDoc) : void
+    public function testParsingValid (string $html, array $expectedMobileDoc, string $message) : void
     {
         $parser = new HtmlParser($html);
         $result = $parser->getResult();
 
-        self::assertEquals([], $result->getLogMessages());
-        self::assertArraySubset($expectedMobileDoc, $result->getMobiledoc());
+        self::assertEquals([], $result->getLogMessages(), $message);
+        self::assertArraySubset($expectedMobileDoc, $result->getMobiledoc(), false, $message);
     }
 
 
@@ -58,7 +63,10 @@ class HtmlParserTest extends TestCase
     {
         foreach (glob(__DIR__ . "/fixtures/invalid/*.html") as $htmlFile)
         {
-            yield [\file_get_contents($htmlFile)];
+            yield [
+                \file_get_contents($htmlFile),
+                \basename($htmlFile, \pathinfo($htmlFile, \PATHINFO_EXTENSION)),
+            ];
         }
     }
 
@@ -67,13 +75,14 @@ class HtmlParserTest extends TestCase
      * @dataProvider provideParsingInvalid
      *
      * @param string $html
+     * @param string $message
      */
-    public function testParsingInvalid (string $html) : void
+    public function testParsingInvalid (string $html, string $message) : void
     {
         $parser = new HtmlParser($html);
         $result = $parser->getResult();
 
-        self::assertNull($result->getMobiledoc());
-        self::assertNotEquals([], $result->getLogMessages());
+        self::assertNull($result->getMobiledoc(), $message);
+        self::assertNotEquals([], $result->getLogMessages(), $message);
     }
 }
