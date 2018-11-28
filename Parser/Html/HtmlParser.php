@@ -54,6 +54,20 @@ class HtmlParser
      */
     public function __construct (string $html, array $additionalParsers = [])
     {
+        // region Prepare Instance Variables
+        $this->mobiledoc = new Document();
+        $this->logger = new ParseLogger();
+        // endregion
+
+        //region Check for empty content and skip the processing
+        $html = \trim($html);
+
+        if ("" === $html)
+        {
+            return;
+        }
+        //endregion
+
         // region Element Parsers
         \array_unshift(
             $additionalParsers,
@@ -65,11 +79,6 @@ class HtmlParser
         );
 
         $this->nodeParser = new HtmlNodeParser($additionalParsers);
-        // endregion
-
-        // region Prepare Instance Variables
-        $this->mobiledoc = new Document();
-        $this->logger = new ParseLogger();
         // endregion
 
         // region Prepare HTML Element

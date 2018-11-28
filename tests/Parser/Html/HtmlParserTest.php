@@ -85,4 +85,24 @@ class HtmlParserTest extends TestCase
         self::assertNull($result->getMobiledoc(), $file);
         self::assertNotEquals([], $result->getLogMessages(), $file);
     }
+
+
+    /**
+     *
+     */
+    public function testEmptyHtml ()
+    {
+        $parser = new HtmlParser("");
+        $result = $parser->getResult();
+
+        $emptyMobileDoc = [
+            "markups" => [],
+            "atoms" => [],
+            "cards" => [],
+            "sections" => [],
+        ];
+
+        self::assertArraySubset($emptyMobileDoc, $result->getMobiledoc());
+        self::assertEquals([], $result->getLogMessages());
+    }
 }
