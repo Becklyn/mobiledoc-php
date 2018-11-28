@@ -11,6 +11,7 @@ use Becklyn\Mobiledoc\Parser\Html\ElementParser\BlockParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\InlineParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LineBreakParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LinkParser;
+use Becklyn\Mobiledoc\Parser\Html\ElementParser\SpanParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\NodeTraverser;
 use Becklyn\Mobiledoc\Parser\ParseLogger;
@@ -59,7 +60,8 @@ class HtmlParser
             new InlineParser(),
             new BlockParser(),
             new LineBreakParser(),
-            new LinkParser()
+            new LinkParser(),
+            new SpanParser()
         );
 
         $this->nodeParser = new HtmlNodeParser($additionalParsers);
