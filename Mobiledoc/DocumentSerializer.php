@@ -107,6 +107,7 @@ class DocumentSerializer
         return [
             MobiledocConstants::LIST_SECTION,
             $section->getTagName(),
+            \array_map([$this, "serializeList"], $section->getListItems()),
         ];
     }
 

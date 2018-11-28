@@ -2,6 +2,8 @@
 
 namespace Becklyn\Mobiledoc\Mobiledoc\Structure\Section;
 
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
+
 
 class ListSection implements Section
 {
@@ -10,12 +12,27 @@ class ListSection implements Section
      */
     private $tagName;
 
+
+    /**
+     * @var Marker[][]
+     */
     private $listItems = [];
 
 
     public function __construct (string $tagName)
     {
         $this->tagName = $tagName;
+    }
+
+
+    /**
+     * Appends a list items containing of all its markers
+     *
+     * @param Marker[] $markers
+     */
+    public function appendListItem (array $markers) : void
+    {
+        $this->listItems[] = $markers;
     }
 
 
@@ -34,5 +51,14 @@ class ListSection implements Section
     public function isEmpty () : bool
     {
         return empty($this->listItems);
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getListItems () : array
+    {
+        return $this->listItems;
     }
 }

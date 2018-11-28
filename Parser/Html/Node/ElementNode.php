@@ -43,7 +43,17 @@ class ElementNode implements HtmlNode
      */
     public function getChildren () : array
     {
-        return NodeTraverser::getSanitizedChildren($this->element);
+        return NodeTraverser::getSanitizedChildren($this->element, NodeTraverser::PRESERVE_WHITSPACE_TEXT_NODES);
+    }
+
+
+    /**
+     * @param bool $stripEmptyTextNodes
+     * @return HtmlNode[]
+     */
+    public function getChildrenWithoutWhitespace () : array
+    {
+        return NodeTraverser::getSanitizedChildren($this->element, NodeTraverser::STRIP_WHITSPACE_TEXT_NODES);
     }
 
 

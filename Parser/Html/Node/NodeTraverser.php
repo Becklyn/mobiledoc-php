@@ -8,11 +8,15 @@ use Becklyn\Mobiledoc\Exception\ParseException;
 
 class NodeTraverser
 {
+    const PRESERVE_WHITSPACE_TEXT_NODES = false;
+    const STRIP_WHITSPACE_TEXT_NODES = true;
+
     /**
      * @param \DOMNode $node
+     * @param bool     $stripEmptyTextNodes
      * @return HtmlNode[]
      */
-    public static function getSanitizedChildren (\DOMNode $node) : array
+    public static function getSanitizedChildren (\DOMNode $node, bool $stripEmptyTextNodes = self::PRESERVE_WHITSPACE_TEXT_NODES) : array
     {
         $children = [];
 
@@ -26,6 +30,11 @@ class NodeTraverser
 
             if ($child instanceof \DOMText)
             {
+                if ($stripEmptyTextNodes && "" === trim($child->textContent))
+                {
+                    continue;
+                }
+
                 $lastIndex = \count($children) - 1;
                 $lastElement = $children[$lastIndex] ?? null;
 
