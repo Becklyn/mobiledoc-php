@@ -6,6 +6,7 @@ use Becklyn\Mobiledoc\Exception\ParseException;
 use Becklyn\Mobiledoc\Mobiledoc\Document;
 use Becklyn\Mobiledoc\Mobiledoc\DocumentSerializer;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\TextMarker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\BlockParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\InlineParser;
@@ -68,6 +69,17 @@ class HtmlParser
         }
         // endregion
 
+        // region Plain Text Check
+        // Checks whether the html only contains of text without any tags.
+        // This would fail while creating a DOMDocument, so we need to check it separately here.
+        if (!$this->hasAnyTags($html))
+        {
+            // just add the plain text and abort
+            $this->mobiledoc->appendToLastParagraph(new TextMarker($html));
+            return;
+        }
+        // endregion
+
         // region Element Parsers
         \array_unshift(
             $additionalParsers,
@@ -106,6 +118,18 @@ class HtmlParser
             $this->logger->log("Parsing failed due to exception: %s", $exception->getMessage());
         }
         // endregion
+    }
+
+
+    /**
+     * Checks whether the given text has any tags
+     *
+     * @param string $html
+     * @return bool
+     */
+    private function hasAnyTags (string $html) : bool
+    {
+        return $html !== \strip_tags($html);
     }
 
 
