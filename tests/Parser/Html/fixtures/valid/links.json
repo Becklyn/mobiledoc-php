@@ -1,0 +1,14 @@
+{
+    "markups": [
+        ["a", ["href", "url", "rel", {"url": "url", "inNewWindow":  false}]],
+        ["a", ["href", "url", "rel", {"url": "url", "inNewWindow":  true}]]
+    ],
+    "sections": [
+        [1, "p", [
+            [0, [0], 1, "Text 1"]
+        ]],
+        [1, "p", [
+            [0, [1], 1, "Text 2"]
+        ]]
+    ]
+}

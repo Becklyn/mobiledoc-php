@@ -11,7 +11,6 @@ use Becklyn\Mobiledoc\Parser\Html\ElementParser\BlockParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\DivParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\InlineParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\LineBreakParser;
-use Becklyn\Mobiledoc\Parser\Html\ElementParser\LinkParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\ListParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\SpanParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\TextParser;
@@ -76,7 +75,6 @@ class HtmlParser
             new InlineParser(),
             new BlockParser(),
             new LineBreakParser(),
-            new LinkParser(),
             new SpanParser(),
             new ListParser(),
             new DivParser()

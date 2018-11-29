@@ -17,6 +17,7 @@ class DocumentSerializer
 {
     private $version = "0.3.1";
     private $markups = [];
+    private $markupIndexMapping = [];
     private $atoms = [];
     private $cards = [];
     private $sections = [];
@@ -168,7 +169,7 @@ class DocumentSerializer
     /**
      * Transforms opening tag names to markup indexes
      *
-     * @param array $openingTags
+     * @param array[] $openingTags
      * @return array
      */
     private function transformOpeningTagsToMarkupIndexes (array $openingTags) : array
@@ -177,12 +178,24 @@ class DocumentSerializer
 
         foreach ($openingTags as $tag)
         {
-            $index = $this->markups[$tag] ?? null;
+            [$tagName, $parameters] = $tag;
+
+            // if the tag has parameters, never look at the index
+            if (!empty($parameters))
+            {
+                $index = \count($this->markups);
+                $this->markups[] = $tag;
+                $indexes[] = $index;
+                continue;
+            }
+
+            $index = $this->markupIndexMapping[$tagName] ?? null;
 
             if (null === $index)
             {
                 $index = \count($this->markups);
-                $this->markups[$tag] = $index;
+                $this->markups[] = [$tagName];
+                $this->markupIndexMapping[$tagName] = $index;
             }
 
             $indexes[] = $index;
@@ -230,20 +243,48 @@ class DocumentSerializer
 
 
     /**
+     * Serialize the markups list
+     *
+     * @param array $markups
+     * @return array
+     */
+    private function serializeMarkups (array $markups) : array
+    {
+        $result = [];
+
+        foreach ($markups as $markup)
+        {
+            $tagName = $markup[0];
+            $parameters = $markup[1] ?? [];
+
+            if (empty($parameters))
+            {
+                $result[] = [$tagName];
+                continue;
+            }
+
+            $serializesParameters = [];
+            foreach ($parameters as $name => $value)
+            {
+                $serializesParameters[] = $name;
+                $serializesParameters[] = $value;
+            }
+
+            $result[] = [$tagName, $serializesParameters];
+        }
+
+        return $result;
+    }
+
+
+    /**
      * @return array
      */
     public function serialize () : array
     {
-        $markups = [];
-
-        foreach ($this->markups as $tag => $index)
-        {
-            $markups[] = [$tag];
-        }
-
         return [
             "version" => $this->version,
-            "markups" => $markups,
+            "markups" => $this->serializeMarkups($this->markups),
             "atoms" => $this->atoms,
             "cards" => $this->cards,
             "sections" => $this->sections,

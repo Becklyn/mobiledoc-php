@@ -8,7 +8,7 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\ContentElement;
 abstract class Marker implements ContentElement
 {
     /**
-     * @var string[]
+     * @var string[][]
      */
     private $openingTags;
 
@@ -40,7 +40,7 @@ abstract class Marker implements ContentElement
 
 
     /**
-     * @return array
+     * @return array[]
      */
     public function getOpeningTags () : array
     {
@@ -69,9 +69,9 @@ abstract class Marker implements ContentElement
     /**
      * @param array $tag
      */
-    public function prependOpeningTag (string $tag) : void
+    public function prependOpeningTag (string $tag, array $parameters = []) : void
     {
-        \array_unshift($this->openingTags, $tag);
+        \array_unshift($this->openingTags, [$tag, $parameters]);
     }
 
 

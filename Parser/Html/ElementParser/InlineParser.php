@@ -13,6 +13,7 @@ use Becklyn\Mobiledoc\Parser\Html\Node\TextNode;
 class InlineParser implements ElementParserInterface
 {
     private const VALID_TAG_NAMES = [
+        "a" => true,
         "b" => true,
         "code" => true,
         "em" => true,
@@ -58,11 +59,35 @@ class InlineParser implements ElementParserInterface
         }
 
         // wrap children correctly in markup
-        $children[0]->prependOpeningTag(\strtolower($node->getTagName()));
+        $children[0]->prependOpeningTag($node->getTagName(), $this->getElementMarkupParameters($node));
         $lastIndex = \count($children) - 1;
         $children[$lastIndex]->addClosingTag();
 
         return $children;
+    }
+
+
+    /**
+     * Returns the markup parameters for the given element
+     *
+     * @param ElementNode $element
+     * @return array
+     */
+    private function getElementMarkupParameters (ElementNode $element) : array
+    {
+        $parameters = [];
+
+        if ("a" === $element->getTagName())
+        {
+            $url = $element->getAttribute("href");
+            $parameters["href"] = $url;
+            $parameters["rel"] = [
+                "url" => $url,
+                "inNewWindow" => "_blank" === $element->getAttribute("target"),
+            ];
+        }
+
+        return $parameters;
     }
 
 

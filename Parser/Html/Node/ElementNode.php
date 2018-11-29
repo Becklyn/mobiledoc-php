@@ -64,4 +64,14 @@ class ElementNode implements HtmlNode
     {
         return "Element <{$this->getTagName()}>";
     }
+
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function getAttribute (string $name) : string
+    {
+        return $this->element->getAttribute($name);
+    }
 }
