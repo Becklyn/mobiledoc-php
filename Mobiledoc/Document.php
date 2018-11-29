@@ -14,12 +14,20 @@ class Document
      */
     private $sections = [];
 
+
+    /**
+     * @var MarkupSection|null
+     */
+    private $lastAutomaticallyCreatedSection;
+
     /**
      * @param Section $section
      */
     public function appendSection (Section $section)
     {
         $this->sections[] = $section;
+        // reset the automatically created section
+        $this->lastAutomaticallyCreatedSection = null;
     }
 
 
@@ -28,15 +36,14 @@ class Document
      */
     public function appendToLastParagraph (Marker $marker) : void
     {
-        $lastSection = \end($this->sections);
-
-        if (!$lastSection instanceof MarkupSection || !$lastSection->isParagraph())
+        if (null === $this->lastAutomaticallyCreatedSection)
         {
-            $lastSection = new MarkupSection("p");
-            $this->appendSection($lastSection);
+            $section = new MarkupSection("p");
+            $this->appendSection($section);
+            $this->lastAutomaticallyCreatedSection = $section;
         }
 
-        $lastSection->append($marker);
+        $this->lastAutomaticallyCreatedSection->append($marker);
     }
 
 
