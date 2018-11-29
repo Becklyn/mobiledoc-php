@@ -6,7 +6,6 @@ use Becklyn\Mobiledoc\Exception\ParseException;
 use Becklyn\Mobiledoc\Mobiledoc\Document;
 use Becklyn\Mobiledoc\Mobiledoc\DocumentSerializer;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
-use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\TextMarker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\BlockParser;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\DivParser;
@@ -63,24 +62,10 @@ class HtmlParser
         $this->logger = new ParseLogger();
         // endregion
 
-        // region Check for empty content and skip the processing
+        // region Prepare HTML
         $html = \trim($html);
-
-        if ("" === $html)
-        {
-            return;
-        }
-        // endregion
-
-        // region Plain Text Check
-        // Checks whether the html only contains of text without any tags.
-        // This would fail while creating a DOMDocument, so we need to check it separately here.
-        if (!$this->hasAnyTags($html))
-        {
-            // just add the plain text and abort
-            $this->mobiledoc->appendToLastParagraph(new TextMarker($html));
-            return;
-        }
+        // wrap text in body tags, otherwise the DOM parser has issues with plain texts.
+        $html = "<body>{$html}</body>";
         // endregion
 
         // region Element Parsers
@@ -101,8 +86,8 @@ class HtmlParser
 
         // region Prepare HTML Element
         $html5 = new HTML5();
-        $this->domDocument = $html5->parse(\trim($html));
-        $root = $this->domDocument->getElementsByTagName("html")[0] ?? null;
+        $this->domDocument = $html5->parse($html);
+        $root = $this->domDocument->getElementsByTagName("body")[0];
         // endregion
 
         // region Parse
@@ -124,18 +109,6 @@ class HtmlParser
             $this->logger->log("Parsing failed due to exception: %s", $exception->getMessage());
         }
         // endregion
-    }
-
-
-    /**
-     * Checks whether the given text has any tags
-     *
-     * @param string $html
-     * @return bool
-     */
-    private function hasAnyTags (string $html) : bool
-    {
-        return $html !== \strip_tags($html);
     }
 
 
