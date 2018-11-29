@@ -1,0 +1,12 @@
+{
+    "sections": [
+        [3, "ul", [
+            [
+                [0, [], 0, "Just text."]
+            ],
+            [
+                [0, [], 0, "Text directly in nested p."]
+            ]
+        ]]
+    ]
+}

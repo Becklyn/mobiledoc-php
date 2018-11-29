@@ -51,12 +51,29 @@ class ListParser implements ElementParserInterface
         }
 
         $items = [];
+        $children = $node->getChildren();
+        $firstChild = $children[0] ?? null;
 
-        foreach ($node->getChildren() as $listItemChild)
+        // if the only child is a single '<p>'
+        if (count($children) === 1 && $firstChild instanceof ElementNode && "p" === $firstChild->getTagName())
         {
-            foreach ($nodeParser->parseInline($listItemChild, $node) as $nestedItem)
+            foreach ($firstChild->getChildren() as $child)
             {
-                $items[] = $nestedItem;
+                foreach ($nodeParser->parseInline($child, $node) as $nestedItem)
+                {
+                    $items[] = $nestedItem;
+                }
+            }
+        }
+        else
+        {
+            // just parse as inline
+            foreach ($node->getChildren() as $listItemChild)
+            {
+                foreach ($nodeParser->parseInline($listItemChild, $node) as $nestedItem)
+                {
+                    $items[] = $nestedItem;
+                }
             }
         }
 
