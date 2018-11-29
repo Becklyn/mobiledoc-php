@@ -54,8 +54,9 @@ class HtmlParser
     /**
      * @param string           $html
      * @param HtmlNodeParser[] $additionalParsers
+     * @param bool             $verboseErrors
      */
-    public function __construct (string $html, array $additionalParsers = [])
+    public function __construct (string $html, array $additionalParsers = [], bool $verboseErrors = false)
     {
         // region Prepare Instance Variables
         $this->mobiledoc = new Document();
@@ -106,7 +107,10 @@ class HtmlParser
         catch (ParseException $exception)
         {
             $this->failed = true;
-            $this->logger->log("Parsing failed due to exception: %s", $exception->getMessage());
+            $this->logger->log(
+                "Parsing failed due to exception: %s",
+                $verboseErrors ? $exception->getFullMessage() : $exception->getMessage()
+            );
         }
         // endregion
     }
