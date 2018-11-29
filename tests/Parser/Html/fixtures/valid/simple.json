@@ -1,0 +1,22 @@
+{
+    "markups": [
+        ["a", ["href", "http://www.example.org/", "rel", {"url": "http://www.example.org/", "inNewWindow":  true}]]
+    ],
+    "atoms": [
+        ["br", "", []],
+        ["br", "", []]
+    ],
+    "sections": [
+        [1, "h3", [
+            [0, [], 0, "More information:"]
+        ]],
+        [1, "p", [
+            [0, [], 0, "\n"],
+            [0, [0], 1, "Company Name"],
+            [1, [], 0, 0],
+            [0, [], 0, "\nStreet name 1"],
+            [1, [], 0, 1],
+            [0, [], 0, "\n12345 City"]
+        ]]
+    ]
+}

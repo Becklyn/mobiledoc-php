@@ -1,0 +1,16 @@
+{
+    "sections": [
+        [1, "p", [
+            [0, [], 0, "First paragraph.\n"]
+        ]],
+        [1, "p", [
+            [0, [], 0, "Second paragraph."]
+        ]],
+        [1, "p", [
+            [0, [], 0, "\nThird paragraph.\n"]
+        ]],
+        [1, "p", [
+            [0, [], 0, "Fourth paragraph."]
+        ]]
+    ]
+}

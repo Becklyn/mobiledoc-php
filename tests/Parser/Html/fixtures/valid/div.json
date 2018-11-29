@@ -1,0 +1,18 @@
+{
+    "markups": [
+        ["b"]
+    ],
+    "sections": [
+        [1, "p", [
+            [0, [], 0, "Test, only "],
+            [0, [0], 1, "Text"],
+            [0, [], 0, "."]
+        ]],
+        [1, "p", [
+            [0, [], 0, "Nested paragraph without text."]
+        ]],
+        [1, "p", [
+            [0, [], 0, "Another nested paragraph without text."]
+        ]]
+    ]
+}

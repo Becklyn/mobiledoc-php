@@ -2,54 +2,66 @@
 
 namespace Becklyn\Mobiledoc\Mobiledoc;
 
-/**
- * A document in both representations
- */
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\MarkupSection;
+use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
+
+
 class Document
 {
     /**
-     * @var array
+     * @var Section[]
      */
-    private $mobiledoc;
+    private $sections = [];
 
 
     /**
-     * @var string
+     * @var MarkupSection|null
      */
-    private $html;
-
+    private $lastAutomaticallyCreatedSection;
 
     /**
-     * @param array  $mobiledoc
-     * @param string $html
+     * @param Section $section
      */
-    public function __construct (array $mobiledoc, string $html)
+    public function appendSection (Section $section)
     {
-        $this->mobiledoc = $mobiledoc;
-        $this->html = $html;
+        $this->sections[] = $section;
+        // reset the automatically created section
+        $this->lastAutomaticallyCreatedSection = null;
     }
 
 
     /**
-     * @return array
+     * @param Marker $marker
      */
-    public function getMobiledoc () : array
+    public function appendToLastParagraph (Marker $marker) : void
     {
-        return $this->mobiledoc;
+        if (null === $this->lastAutomaticallyCreatedSection)
+        {
+            $section = new MarkupSection("p");
+            $this->appendSection($section);
+            $this->lastAutomaticallyCreatedSection = $section;
+        }
+
+        $this->lastAutomaticallyCreatedSection->append($marker);
     }
 
 
     /**
-     * @return string
+     * @return Section[]
      */
-    public function getHtml () : string
+    public function getNonEmptySections () : array
     {
-        return $this->html;
-    }
+        $nonEmpty = [];
 
+        foreach ($this->sections as $section)
+        {
+            if (!$section->isEmpty())
+            {
+                $nonEmpty[] = $section;
+            }
+        }
 
-    public function __toString ()
-    {
-        return $this->html;
+        return $nonEmpty;
     }
 }

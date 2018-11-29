@@ -11,9 +11,12 @@
         }
     ],
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "ext-dom": "*",
+        "masterminds/html5": "^2.4"
     },
     "require-dev": {
+        "ext-json": "*",
         "becklyn/php-cs": "^1.0.9"
     },
     "config": {
