@@ -256,7 +256,16 @@ class RenderProcess
         $renderedAttributes = [];
         for ($i = 0; $i < $numberOfAttributes; $i++)
         {
-            $renderedAttributes[] = $attributes[$i * 2] . '="' . \htmlspecialchars($attributes[($i * 2) + 1], \ENT_QUOTES) . '"';
+            $name = $attributes[$i * 2];
+            $value = $attributes[($i * 2) + 1];
+
+            // skip values, that are not strings (to be forward compatible with structured markup contexts)
+            if (!\is_string($value))
+            {
+                continue;
+            }
+
+            $renderedAttributes[] = $name . '="' . \htmlspecialchars($value, \ENT_QUOTES) . '"';
         }
 
         return "<{$tagName} " . \implode(" ", $renderedAttributes) .  ">";
