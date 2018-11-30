@@ -157,6 +157,19 @@ class RichTextRendererTest extends TestCase
                     ],
                 ],
                 '<img src="https://becklyn.com/example.png" alt="">',
+            ],
+            "ignore non-array attributes" => [
+                [
+                    "markups" => [
+                        ["a", ["href", "http://example.org", "rel", ["an" => "array"]]],
+                    ],
+                    "sections" => [
+                        [1, "p", [
+                            [0, [0], 1, "Link Text"],
+                        ]],
+                    ],
+                ],
+                '<p><a href="http://example.org">Link Text</a></p>'
             ]
         ];
     }
