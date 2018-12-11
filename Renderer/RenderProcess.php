@@ -88,7 +88,7 @@ class RenderProcess
             }
         }
 
-        return implode("", $result);
+        return \implode("", $result);
     }
 
 
@@ -241,7 +241,7 @@ class RenderProcess
             $closingTags[] = "</{$closingTag}>";
         }
 
-        return implode("", $openingTags) . $text . \implode("", $closingTags);
+        return \implode("", $openingTags) . $text . \implode("", $closingTags);
     }
 
 
@@ -323,7 +323,7 @@ class RenderProcess
      */
     private function parseFlatAttributes (array $attributes) : array
     {
-        $numberOfEntries = floor(count($attributes) / 2);
+        $numberOfEntries = \floor(\count($attributes) / 2);
         $structured = [];
 
         for ($i = 0; $i < $numberOfEntries; $i++)
@@ -334,7 +334,7 @@ class RenderProcess
         }
 
         // if the array has an odd number of entries, just add the last remaining key with `null` as value
-        $lastIndex = count($attributes) - 1;
+        $lastIndex = \count($attributes) - 1;
         if ($lastIndex % 2 === 0)
         {
             $structured[$attributes[$lastIndex]] = null;
