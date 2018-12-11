@@ -2,7 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Renderer;
 
-use Becklyn\Mobiledoc\Mobiledoc\SimpleDocument;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 use Becklyn\Mobiledoc\Renderer\Markup\MarkupAttributesVisitor;
 
@@ -49,9 +48,9 @@ class MobiledocRenderer
      * Renders the given mobiledoc to a document
      *
      * @param array|null $mobiledoc
-     * @return SimpleDocument|null
+     * @return string|null
      */
-    public function render (?array $mobiledoc) : ?SimpleDocument
+    public function render (?array $mobiledoc) : ?string
     {
         if (null === $mobiledoc)
         {
@@ -59,6 +58,6 @@ class MobiledocRenderer
         }
 
         $render = new RenderProcess($mobiledoc, $this->extensionRegistry, $this->markupAttributesVisitor);
-        return $render->getRenderedDocument();
+        return $render->getHtml();
     }
 }
