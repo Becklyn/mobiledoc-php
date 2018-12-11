@@ -12,12 +12,12 @@
     ],
     "require": {
         "php": "^7.1",
-        "ext-dom": "*",
-        "masterminds/html5": "^2.4"
+        "ext-dom": "*"
     },
     "require-dev": {
         "ext-json": "*",
-        "becklyn/php-cs": "^1.0.9"
+        "becklyn/php-cs": "^1.0.9",
+        "masterminds/html5": "^2.4"
     },
     "config": {
         "sort-packages": true
@@ -31,5 +31,8 @@
         "psr-4": {
             "Tests\\Becklyn\\Mobiledoc\\": "tests/"
         }
+    },
+    "suggest": {
+        "masterminds/html5": "To automatically preprocess the given HTML to increase compatibility with the native DOM tools when importing HTML."
     }
 }
