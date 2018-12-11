@@ -4,7 +4,9 @@ namespace Tests\Becklyn\Mobiledoc\Renderer;
 
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 use Becklyn\Mobiledoc\Extension\RichTextExtensionInterface;
+use Becklyn\Mobiledoc\Renderer\Markup\MarkupAttributesVisitor;
 use Becklyn\Mobiledoc\Renderer\MobiledocRenderer;
+use Becklyn\Mobiledoc\Renderer\RenderProcess;
 use Becklyn\Mobiledoc\tests\Fixtures\ExampleAtom;
 use Becklyn\Mobiledoc\tests\Fixtures\IframeCard;
 use PHPUnit\Framework\TestCase;
@@ -347,5 +349,134 @@ class RichTextRendererTest extends TestCase
                 [10, 0],
             ],
         ]);
+    }
+
+
+    /**
+     * Tests all different supported values for generating markup
+     */
+    public function testAttributeMarkupGeneration ()
+    {
+        $document = [
+            "markups" => [
+                ["b", ["int", 123, "string", "ohai", "null", null, "false", false, "true", true, "float", 1.23, "surplus-element"]]
+            ],
+            "sections" => [
+                [1, "p", [
+                    [0, [0], 1, "Text"]
+                ]]
+            ]
+        ];
+        $renderer = new RenderProcess($document, new ExtensionRegistry());
+        self::assertSame('<p><b int="123" string="ohai" true float="1.23">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
+    }
+
+
+    /**
+     * Tests that markup attribute visitors are correctly used
+     */
+    public function testMarkupAttributesVisitor ()
+    {
+        $document = [
+            "markups" => [
+                ["b", ["rel", "ohai"]]
+            ],
+            "sections" => [
+                [1, "p", [
+                    [0, [0], 1, "Text"]
+                ]]
+            ]
+        ];
+
+        $visitor = new class implements MarkupAttributesVisitor
+        {
+            /**
+             * @inheritDoc
+             */
+            public function transform (string $tagName, array $attributes) : ?array
+            {
+                return ["a" => "b"];
+            }
+        };
+
+        $renderer = new RenderProcess($document, new ExtensionRegistry(), [$visitor]);
+        self::assertSame('<p><b a="b">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
+    }
+
+
+    /**
+     * Tests that skipped visitors don't modify the result
+     */
+    public function testSkippedMarkupAttributesVisitor ()
+    {
+
+        $document = [
+            "markups" => [
+                ["b", ["rel", "ohai"]]
+            ],
+            "sections" => [
+                [1, "p", [
+                    [0, [0], 1, "Text"]
+                ]]
+            ]
+        ];
+
+        $visitor = new class implements MarkupAttributesVisitor
+        {
+            /**
+             * @inheritDoc
+             */
+            public function transform (string $tagName, array $attributes) : ?array
+            {
+                return null;
+            }
+        };
+
+        $renderer = new RenderProcess($document, new ExtensionRegistry(), [$visitor]);
+        self::assertSame('<p><b rel="ohai">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
+    }
+
+
+    /**
+     * Tests that the first matched visitor changed the result
+     */
+    public function testMarkupAttributesVisitorOrder ()
+    {
+
+        $document = [
+            "markups" => [
+                ["b", ["rel", "ohai"]]
+            ],
+            "sections" => [
+                [1, "p", [
+                    [0, [0], 1, "Text"]
+                ]]
+            ]
+        ];
+
+        $visitor1 = new class implements MarkupAttributesVisitor
+        {
+            /**
+             * @inheritDoc
+             */
+            public function transform (string $tagName, array $attributes) : ?array
+            {
+                return ["index" => 1];
+            }
+        };
+
+        $visitor2 = new class implements MarkupAttributesVisitor
+        {
+            /**
+             * @inheritDoc
+             */
+            public function transform (string $tagName, array $attributes) : ?array
+            {
+                return ["index" => 2];
+            }
+        };
+
+        $renderer = new RenderProcess($document, new ExtensionRegistry(), [$visitor1, $visitor2]);
+        self::assertSame('<p><b index="1">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
     }
 }
