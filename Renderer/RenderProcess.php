@@ -3,7 +3,6 @@
 namespace Becklyn\Mobiledoc\Renderer;
 
 use Becklyn\Mobiledoc\Mobiledoc\MobiledocConstants;
-use Becklyn\Mobiledoc\Mobiledoc\SimpleDocument;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 use Becklyn\Mobiledoc\Renderer\Markup\MarkupAttributesVisitor;
 
@@ -305,11 +304,11 @@ class RenderProcess
 
 
     /**
-     * @return SimpleDocument
+     * @return string|null
      */
-    public function getRenderedDocument () : SimpleDocument
+    public function getHtml () : ?string
     {
-        return new SimpleDocument($this->mobiledoc, $this->text);
+        return $this->text;
     }
 
 

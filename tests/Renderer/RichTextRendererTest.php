@@ -186,7 +186,7 @@ class RichTextRendererTest extends TestCase
     public function testRendering (array $mobiledoc, string $expectedResult)
     {
         $renderer = new MobiledocRenderer(new ExtensionRegistry());
-        self::assertSame($expectedResult, (string) $renderer->render($mobiledoc));
+        self::assertSame($expectedResult, $renderer->render($mobiledoc));
     }
 
 
@@ -210,7 +210,7 @@ class RichTextRendererTest extends TestCase
 
         self::assertSame(
             '<p><span class="example-atom" title="my title">content</span></p>',
-            (string) $renderer->render([
+            $renderer->render([
                 "atoms" => [
                     ["example-atom", "content", ["title" => "my title"]],
                 ],
@@ -233,7 +233,7 @@ class RichTextRendererTest extends TestCase
 
         self::assertSame(
             '<p>content</p>',
-            (string) $renderer->render([
+            $renderer->render([
                 "atoms" => [
                     ["example-atom", "content", ["title" => "my title"]],
                 ],
@@ -257,7 +257,7 @@ class RichTextRendererTest extends TestCase
 
         self::assertSame(
             '<p>before</p><iframe src="https://becklyn.com"></iframe><p>after</p>',
-            (string) $renderer->render([
+            $renderer->render([
                 "cards" => [
                     ["iframe", ["src" => "https://becklyn.com"]],
                 ],
@@ -284,7 +284,7 @@ class RichTextRendererTest extends TestCase
 
         self::assertSame(
             '<p>before</p><p>after</p>',
-            (string) $renderer->render([
+            $renderer->render([
                 "cards" => [
                     ["missing", ["some" => "data"]],
                 ],
