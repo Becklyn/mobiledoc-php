@@ -84,8 +84,17 @@ class HtmlParser
         // endregion
 
         // region Prepare HTML Element
-        $html5 = new HTML5();
-        $this->domDocument = $html5->parse($html);
+        if (\class_exists(HTML5::class))
+        {
+            $html5 = new HTML5();
+            $this->domDocument = $html5->parse($html);
+        }
+        else
+        {
+            $this->domDocument = new \DOMDocument("1.0", "utf-8");
+            @$this->domDocument->loadHTML($html);
+        }
+
         $root = $this->domDocument->getElementsByTagName("body")[0];
         // endregion
 
