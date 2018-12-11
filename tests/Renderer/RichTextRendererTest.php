@@ -368,7 +368,7 @@ class RichTextRendererTest extends TestCase
             ]
         ];
         $renderer = new RenderProcess($document, new ExtensionRegistry());
-        self::assertSame('<p><b int="123" string="ohai" true float="1.23">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
+        self::assertSame('<p><b int="123" string="ohai" true float="1.23">Text</b></p>', $renderer->getHtml());
     }
 
 
@@ -400,7 +400,7 @@ class RichTextRendererTest extends TestCase
         };
 
         $renderer = new RenderProcess($document, new ExtensionRegistry(), [$visitor]);
-        self::assertSame('<p><b a="b">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
+        self::assertSame('<p><b a="b">Text</b></p>', $renderer->getHtml());
     }
 
 
@@ -433,7 +433,7 @@ class RichTextRendererTest extends TestCase
         };
 
         $renderer = new RenderProcess($document, new ExtensionRegistry(), [$visitor]);
-        self::assertSame('<p><b rel="ohai">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
+        self::assertSame('<p><b rel="ohai">Text</b></p>', $renderer->getHtml());
     }
 
 
@@ -477,6 +477,6 @@ class RichTextRendererTest extends TestCase
         };
 
         $renderer = new RenderProcess($document, new ExtensionRegistry(), [$visitor1, $visitor2]);
-        self::assertSame('<p><b index="1">Text</b></p>', $renderer->getRenderedDocument()->getHtml());
+        self::assertSame('<p><b index="1">Text</b></p>', $renderer->getHtml());
     }
 }
