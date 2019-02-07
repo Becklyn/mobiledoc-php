@@ -28,6 +28,31 @@ class RichTextRendererTest extends TestCase
                 ],
                 "<p>oh hai</p>",
             ],
+            "headings should receive h*-class" => [
+                [
+                    "sections" => [
+                        [1, "h1", [
+                            [0, [], 0, "oh hai"],
+                        ]],
+                        [1, "h2", [
+                            [0, [], 0, "oh hai"],
+                        ]],
+                        [1, "h3", [
+                            [0, [], 0, "oh hai"],
+                        ]],
+                        [1, "h4", [
+                            [0, [], 0, "oh hai"],
+                        ]],
+                        [1, "h5", [
+                            [0, [], 0, "oh hai"],
+                        ]],
+                        [1, "h6", [
+                            [0, [], 0, "oh hai"],
+                        ]],
+                    ],
+                ],
+                '<h1 class="h1">oh hai</h1><h2 class="h2">oh hai</h2><h3 class="h3">oh hai</h3><h4 class="h4">oh hai</h4><h5 class="h5">oh hai</h5><h6 class="h6">oh hai</h6>',
+            ],
             "single markup" => [
                 [
                     "markups" => [
