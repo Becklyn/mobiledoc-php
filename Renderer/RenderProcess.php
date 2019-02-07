@@ -100,7 +100,11 @@ class RenderProcess
      */
     private function renderTextSection (string $tagName, array $markers) : string
     {
-        return "<{$tagName}>" . $this->renderMarkers($markers) . "</{$tagName}>";
+        $tagAttributes = 0 !== \preg_match("#^h[1-6]$#", $tagName)
+            ? " class=\"{$tagName}\""
+            : "";
+
+        return "<{$tagName}{$tagAttributes}>{$this->renderMarkers($markers)}</{$tagName}>";
     }
 
 
@@ -137,7 +141,8 @@ class RenderProcess
     /**
      * Renders a card
      *
-     * @param array $cardConfig
+     * @param int $cardIndex
+     *
      * @return string
      */
     private function renderCardSection (int $cardIndex) : string
@@ -263,6 +268,7 @@ class RenderProcess
 
         // parse attribute list to a structured array
         $attributes = $this->parseFlatAttributes($flatAttributes);
+        $renderedAttributes = [];
 
         foreach ($this->markupAttributesVisitors as $visitor)
         {
