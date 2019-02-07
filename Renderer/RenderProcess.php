@@ -142,7 +142,8 @@ class RenderProcess
     /**
      * Renders a card
      *
-     * @param array $cardConfig
+     * @param int $cardIndex
+     *
      * @return string
      */
     private function renderCardSection (int $cardIndex) : string
@@ -268,6 +269,7 @@ class RenderProcess
 
         // parse attribute list to a structured array
         $attributes = $this->parseFlatAttributes($flatAttributes);
+        $renderedAttributes = [];
 
         foreach ($this->markupAttributesVisitors as $visitor)
         {
