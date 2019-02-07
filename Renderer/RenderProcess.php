@@ -100,9 +100,8 @@ class RenderProcess
      */
     private function renderTextSection (string $tagName, array $markers) : string
     {
-        $matches = [];
-        $tagAttributes = 1 === \preg_match("#^h[1-6]$#", $tagName, $matches)
-            ? " class=\"{$matches[0]}\""
+        $tagAttributes = 0 !== \preg_match("#^h[1-6]$#", $tagName)
+            ? " class=\"{$tagName}\""
             : "";
 
         return "<{$tagName}{$tagAttributes}>{$this->renderMarkers($markers)}</{$tagName}>";
