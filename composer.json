@@ -1,5 +1,5 @@
 {
-    "name": "clinect/mobiledoc",
+    "name": "becklyn/mobiledoc",
     "type": "library",
     "description": "A PHP-based renderer for the mobiledoc format.",
     "homepage": "https://github.com/Becklyn/mobiledoc-php",
