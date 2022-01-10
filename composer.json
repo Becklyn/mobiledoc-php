@@ -1,5 +1,5 @@
 {
-    "name": "becklyn/mobiledoc",
+    "name": "clinect/mobiledoc",
     "type": "library",
     "description": "A PHP-based renderer for the mobiledoc format.",
     "homepage": "https://github.com/Becklyn/mobiledoc-php",
@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^8.0",
         "ext-dom": "*"
     },
     "require-dev": {
