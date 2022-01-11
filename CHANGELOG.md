@@ -1,3 +1,9 @@
+2.0.2
+=====
+
+*   (improvement) Add support for PHP 8.0.
+
+
 2.0.1
 =====
 
