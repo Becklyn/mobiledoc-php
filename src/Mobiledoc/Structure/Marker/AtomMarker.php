@@ -4,20 +4,10 @@ namespace Becklyn\Mobiledoc\Mobiledoc\Structure\Marker;
 
 class AtomMarker extends Marker
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
+    private array $payload;
 
 
-    /**
-     * @var array
-     */
-    private $payload;
-
-
-    /**
-     */
     public function __construct (string $name, string $text, array $payload = [], array $openedMarkups = [], int $closedMarkups = 0)
     {
         parent::__construct($text, $openedMarkups, $closedMarkups);
@@ -26,16 +16,12 @@ class AtomMarker extends Marker
     }
 
 
-    /**
-     */
     public function getName () : string
     {
         return $this->name;
     }
 
 
-    /**
-     */
     public function getPayload () : array
     {
         return $this->payload;

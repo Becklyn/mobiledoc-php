@@ -6,22 +6,10 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\ContentElement;
 
 abstract class Marker implements ContentElement
 {
-    /**
-     * @var string[][]
-     */
-    private $openingTags;
-
-
-    /**
-     * @var int
-     */
-    private $closingTags;
-
-
-    /**
-     * @var string
-     */
-    private $text;
+    /** @var string[][] */
+    private array $openingTags;
+    private int $closingTags;
+    private string $text;
 
 
     /**
@@ -44,16 +32,12 @@ abstract class Marker implements ContentElement
     }
 
 
-    /**
-     */
     public function getClosingTags () : int
     {
         return $this->closingTags;
     }
 
 
-    /**
-     */
     public function getText () : string
     {
         return $this->text;
@@ -66,17 +50,12 @@ abstract class Marker implements ContentElement
     }
 
 
-    /**
-     *
-     */
     public function addClosingTag () : void
     {
         ++$this->closingTags;
     }
 
 
-    /**
-     */
     public function isEmpty () : bool
     {
         return "" === \trim($this->text);

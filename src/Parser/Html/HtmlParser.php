@@ -22,31 +22,11 @@ use Masterminds\HTML5;
 
 class HtmlParser
 {
-    /**
-     * @var \DOMDocument
-     */
-    private $domDocument;
-
-    /**
-     * @var Document
-     */
-    private $mobiledoc;
-
-    /**
-     * @var ParseLogger
-     */
-    private $logger;
-
-    /**
-     * @var HtmlNodeParser
-     */
-    private $nodeParser;
-
-
-    /**
-     * @var bool
-     */
-    private $failed = false;
+    private \DOMDocument $domDocument;
+    private Document $mobiledoc;
+    private ParseLogger $logger;
+    private HtmlNodeParser $nodeParser;
+    private bool $failed = false;
 
 
     /**
@@ -161,8 +141,6 @@ class HtmlParser
     }
 
 
-    /**
-     */
     public function getResult () : ParseResult
     {
         if ($this->failed)

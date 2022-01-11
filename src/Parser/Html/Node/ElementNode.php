@@ -4,30 +4,21 @@ namespace Becklyn\Mobiledoc\Parser\Html\Node;
 
 class ElementNode implements HtmlNode
 {
-    /**
-     * @var \DOMElement
-     */
-    private $element;
+    private \DOMElement $element;
 
 
-    /**
-     */
     public function __construct (\DOMElement $element)
     {
         $this->element = $element;
     }
 
 
-    /**
-     */
     public function getElement () : \DOMElement
     {
         return $this->element;
     }
 
 
-    /**
-     */
     public function getTagName () : string
     {
         return \strtolower($this->element->tagName);
@@ -61,8 +52,6 @@ class ElementNode implements HtmlNode
     }
 
 
-    /**
-     */
     public function getAttribute (string $name) : string
     {
         return $this->element->getAttribute($name);

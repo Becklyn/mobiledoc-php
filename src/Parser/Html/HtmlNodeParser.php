@@ -10,14 +10,10 @@ use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 
 class HtmlNodeParser
 {
-    /**
-     * @var ElementParserInterface[]
-     */
-    private $parsers = [];
+    /** @var ElementParserInterface[] */
+    private array $parsers = [];
 
 
-    /**
-     */
     public function __construct (array $parsers)
     {
         foreach ($parsers as $parser)
@@ -27,8 +23,6 @@ class HtmlNodeParser
     }
 
 
-    /**
-     */
     private function registerParser (ElementParserInterface $parser) : void
     {
         $this->parsers[] = $parser;

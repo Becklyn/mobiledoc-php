@@ -5,6 +5,7 @@
 *   (internal) Replace TravisCI with GitHub Actions.
 *   (internal) Bump minimum required version to PHP 7.4.
 *   (internal) Add GitHub Code Owners + Pull Request Template.
+*   (improvement) Use typed properties everywhere and remove redundant PhpDoc.
 
 
 2.0.1

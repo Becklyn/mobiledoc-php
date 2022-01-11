@@ -4,30 +4,21 @@ namespace Becklyn\Mobiledoc\Parser\Html\Node;
 
 class TextNode implements HtmlNode
 {
-    /**
-     * @var string
-     */
-    private $text;
+    private string $text;
 
 
-    /**
-     */
     public function __construct (\DOMText $node)
     {
         $this->text = $node->textContent;
     }
 
 
-    /**
-     */
     public function appendText (string $text) : void
     {
         $this->text .= $text;
     }
 
 
-    /**
-     */
     public function getText () : string
     {
         return $this->text;

@@ -8,19 +8,11 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 
 class Document
 {
-    /**
-     * @var Section[]
-     */
-    private $sections = [];
+    /** @var Section[] */
+    private array $sections = [];
+    private ?MarkupSection $lastAutomaticallyCreatedSection = null;
 
 
-    /**
-     * @var MarkupSection|null
-     */
-    private $lastAutomaticallyCreatedSection;
-
-    /**
-     */
     public function appendSection (Section $section) : void
     {
         $this->sections[] = $section;
@@ -29,8 +21,6 @@ class Document
     }
 
 
-    /**
-     */
     public function appendToLastParagraph (Marker $marker) : void
     {
         if (null === $this->lastAutomaticallyCreatedSection)

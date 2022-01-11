@@ -4,10 +4,9 @@ namespace Becklyn\Mobiledoc\Mobiledoc\Structure;
 
 class Markups
 {
-    private $markups = [];
+    private array $markups = [];
 
-    /**
-     */
+
     public function transformTagsToIndexes (array $tags) : array
     {
         $indexes = [];
@@ -28,8 +27,7 @@ class Markups
         return $indexes;
     }
 
-    /**
-     */
+
     public function serialize () : array
     {
         $list = [];

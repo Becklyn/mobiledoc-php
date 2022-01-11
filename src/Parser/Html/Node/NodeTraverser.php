@@ -9,6 +9,7 @@ class NodeTraverser
     public const PRESERVE_WHITSPACE_TEXT_NODES = false;
     public const STRIP_WHITSPACE_TEXT_NODES = true;
 
+
     /**
      * @return HtmlNode[]
      */

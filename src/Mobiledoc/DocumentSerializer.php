@@ -14,12 +14,13 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
  */
 class DocumentSerializer
 {
-    private $version = "0.3.1";
-    private $markups = [];
-    private $markupIndexMapping = [];
-    private $atoms = [];
-    private $cards = [];
-    private $sections = [];
+    private string $version = "0.3.1";
+    private array $markups = [];
+    private array $markupIndexMapping = [];
+    private array $atoms = [];
+    private array $cards = [];
+    private array $sections;
+
 
     /**
      * @param Section[] $sections
@@ -30,8 +31,6 @@ class DocumentSerializer
     }
 
 
-    /**
-     */
     private function serializeList (array $list) : array
     {
         $serialized = [];
@@ -45,16 +44,8 @@ class DocumentSerializer
     }
 
 
-    /**
-     * @param object $entry
-     */
-    private function serializeEntry ($entry) : array
+    private function serializeEntry (object $entry) : array
     {
-        if (!\is_object($entry))
-        {
-            throw new \InvalidArgumentException(\sprintf("Can't serialize non-object, %s given.", \gettype($entry)));
-        }
-
         switch (true)
         {
             case $entry instanceof MarkupSection:

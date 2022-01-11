@@ -6,16 +6,9 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 
 class ListSection implements Section
 {
-    /**
-     * @var string
-     */
-    private $tagName;
-
-
-    /**
-     * @var Marker[][]
-     */
-    private $listItems = [];
+    private string $tagName;
+    /** @var Marker[][] */
+    private array $listItems = [];
 
 
     public function __construct (string $tagName)
@@ -35,8 +28,6 @@ class ListSection implements Section
     }
 
 
-    /**
-     */
     public function getTagName () : string
     {
         return $this->tagName;
@@ -52,8 +43,6 @@ class ListSection implements Section
     }
 
 
-    /**
-     */
     public function getListItems () : array
     {
         return $this->listItems;

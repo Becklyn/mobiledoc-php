@@ -48,6 +48,7 @@ class DivParser implements ElementParserInterface
         return $children;
     }
 
+
     /**
      * @inheritDoc
      */

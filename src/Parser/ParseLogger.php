@@ -4,7 +4,8 @@ namespace Becklyn\Mobiledoc\Parser;
 
 class ParseLogger
 {
-    private $messages = [];
+    /** @var string[] */
+    private array $messages = [];
 
 
     /**
@@ -17,6 +18,7 @@ class ParseLogger
 
 
     /**
+     * @return string[]
      */
     public function getMessages () : array
     {

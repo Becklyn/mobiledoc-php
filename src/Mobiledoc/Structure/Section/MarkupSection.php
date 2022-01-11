@@ -6,44 +6,29 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 
 class MarkupSection implements Section
 {
-    /**
-     * @var string
-     */
-    private $tagName;
+    private string $tagName;
+    /** @var Marker[] */
+    private array $markers = [];
 
 
-    /**
-     * @var Marker[]
-     */
-    private $markers = [];
-
-
-    /**
-     */
     public function __construct (string $tagName)
     {
         $this->tagName = $tagName;
     }
 
 
-    /**
-     */
     public function append (Marker $marker) : void
     {
         $this->markers[] = $marker;
     }
 
 
-    /**
-     */
     public function isParagraph () : bool
     {
         return "p" === $this->tagName;
     }
 
 
-    /**
-     */
     public function getTagName () : string
     {
         return $this->tagName;

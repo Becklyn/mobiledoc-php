@@ -9,14 +9,14 @@ use Becklyn\Mobiledoc\Exception\DuplicateExtensionMobiledocException;
  */
 class ExtensionRegistry
 {
-    /**
-     * @var RichTextExtensionInterface[]
-     */
-    private $extensions = [];
+    /** @var RichTextExtensionInterface[] */
+    private array $extensions = [];
 
 
     /**
      * @param RichTextExtensionInterface[] $extensions
+     *
+     * @throws DuplicateExtensionMobiledocException
      */
     public function __construct (iterable $extensions = [])
     {
@@ -28,6 +28,7 @@ class ExtensionRegistry
 
 
     /**
+     * @throws DuplicateExtensionMobiledocException
      */
     public function registerExtension (RichTextExtensionInterface $extension) : void
     {
@@ -42,8 +43,6 @@ class ExtensionRegistry
     }
 
 
-    /**
-     */
     public function getExtension (string $name) : ?RichTextExtensionInterface
     {
         return $this->extensions[$name] ?? null;
