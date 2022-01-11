@@ -1,30 +1,31 @@
 {
     "name": "becklyn/mobiledoc",
-    "type": "library",
     "description": "A PHP-based renderer for the mobiledoc format.",
-    "homepage": "https://github.com/Becklyn/mobiledoc-php",
     "license": "BSD-3-Clause",
+    "type": "library",
     "authors": [
         {
             "name": "Becklyn Studios",
             "homepage": "https://becklyn.com/"
         }
     ],
+    "homepage": "https://github.com/Becklyn/mobiledoc-php",
     "require": {
-        "php": "^7.1|^8.0",
+        "php": "^7.4 || ^8.0",
         "ext-dom": "*"
     },
     "require-dev": {
         "ext-json": "*",
-        "becklyn/php-cs": "^1.0.9",
-        "masterminds/html5": "^2.4"
+        "dms/phpunit-arraysubset-asserts": "^0.3.1",
+        "masterminds/html5": "^2.7.5",
+        "symfony/phpunit-bridge": "^6.0.0"
     },
-    "config": {
-        "sort-packages": true
+    "suggest": {
+        "masterminds/html5": "To automatically preprocess the given HTML to increase compatibility with the native DOM tools when importing HTML."
     },
     "autoload": {
         "psr-4": {
-            "Becklyn\\Mobiledoc\\": ""
+            "Becklyn\\Mobiledoc\\": "src"
         }
     },
     "autoload-dev": {
@@ -32,7 +33,10 @@
             "Tests\\Becklyn\\Mobiledoc\\": "tests/"
         }
     },
-    "suggest": {
-        "masterminds/html5": "To automatically preprocess the given HTML to increase compatibility with the native DOM tools when importing HTML."
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        },
+        "sort-packages": true
     }
 }

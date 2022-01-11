@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Becklyn\Mobiledoc\tests\Fixtures;
+namespace Tests\Becklyn\Mobiledoc\Fixtures;
 
 use Becklyn\Mobiledoc\Extension\RichTextExtensionInterface;
 

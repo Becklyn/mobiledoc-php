@@ -7,10 +7,9 @@ use Becklyn\Mobiledoc\Extension\RichTextExtensionInterface;
 use Becklyn\Mobiledoc\Renderer\Markup\MarkupAttributesVisitor;
 use Becklyn\Mobiledoc\Renderer\MobiledocRenderer;
 use Becklyn\Mobiledoc\Renderer\RenderProcess;
-use Becklyn\Mobiledoc\tests\Fixtures\ExampleAtom;
-use Becklyn\Mobiledoc\tests\Fixtures\IframeCard;
 use PHPUnit\Framework\TestCase;
-
+use Tests\Becklyn\Mobiledoc\Fixtures\ExampleAtom;
+use Tests\Becklyn\Mobiledoc\Fixtures\IframeCard;
 
 class RichTextRendererTest extends TestCase
 {
