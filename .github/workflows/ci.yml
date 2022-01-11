@@ -31,4 +31,4 @@ jobs:
             - name: PhpStan
               run: ./vendor/bin/phpstan analyse --memory-limit 4G --ansi -c vendor-bin/test/vendor/becklyn/php-cs/phpstan/lib.neon src --no-interaction --no-progress
             - name: PhpUnit
-              run: ./vendor/bin/simple-phpunit -c phpunit.xml --testdox
+              run: ./vendor/bin/phpunit -c phpunit.xml --testdox

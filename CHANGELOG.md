@@ -6,6 +6,7 @@
 *   (internal) Bump minimum required version to PHP 7.4.
 *   (internal) Add GitHub Code Owners + Pull Request Template.
 *   (improvement) Use typed properties everywhere and remove redundant PhpDoc.
+*   (improvement) Fixed deprecated PhpUnit code in Tests.
 
 
 2.0.1

@@ -1,17 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Becklyn\Mobiledoc\tests\Parser\Html;
+namespace Tests\Becklyn\Mobiledoc\Parser\Html;
 
 use Becklyn\Mobiledoc\Parser\Html\HtmlParser;
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
 use PHPUnit\Framework\TestCase;
 
 
 class HtmlParserTest extends TestCase
 {
-    /**
-     * @return \Generator
-     */
-    public function provideParsingValid ()
+    public function provideParsingValid () : \Generator
     {
         foreach (glob(__DIR__ . "/fixtures/valid/*.json") as $mobiledocFile)
         {
@@ -52,14 +50,11 @@ class HtmlParserTest extends TestCase
         $result = $parser->getResult();
 
         self::assertEquals([], $result->getLogMessages(), $file);
-        self::assertArraySubset($expectedMobileDoc, $result->getMobiledoc(), false, $file);
+        Assert::assertArraySubset($expectedMobileDoc, $result->getMobiledoc(), false, $file);
     }
 
 
-    /**
-     * @return \Generator
-     */
-    public function provideParsingInvalid ()
+    public function provideParsingInvalid () : \Generator
     {
         foreach (glob(__DIR__ . "/fixtures/invalid/*.html") as $htmlFile)
         {
@@ -87,10 +82,7 @@ class HtmlParserTest extends TestCase
     }
 
 
-    /**
-     *
-     */
-    public function testEmptyHtml ()
+    public function testEmptyHtml () : void
     {
         $parser = new HtmlParser("");
         $result = $parser->getResult();
@@ -102,7 +94,7 @@ class HtmlParserTest extends TestCase
             "sections" => [],
         ];
 
-        self::assertArraySubset($emptyMobileDoc, $result->getMobiledoc());
+        Assert::assertArraySubset($emptyMobileDoc, $result->getMobiledoc());
         self::assertEquals([], $result->getLogMessages());
     }
 }

@@ -16,7 +16,9 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "masterminds/html5": "^2.4"
+        "dms/phpunit-arraysubset-asserts": "^0.3.1",
+        "masterminds/html5": "^2.7.5",
+        "symfony/phpunit-bridge": "^6.0.0"
     },
     "suggest": {
         "masterminds/html5": "To automatically preprocess the given HTML to increase compatibility with the native DOM tools when importing HTML."

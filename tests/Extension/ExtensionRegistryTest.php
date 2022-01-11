@@ -2,6 +2,7 @@
 
 namespace Tests\Becklyn\Mobiledoc\Extension;
 
+use Becklyn\Mobiledoc\Exception\DuplicateExtensionMobiledocException;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 use PHPUnit\Framework\TestCase;
 use Tests\Becklyn\Mobiledoc\Fixtures\TestExtension;
@@ -9,7 +10,7 @@ use Tests\Becklyn\Mobiledoc\Fixtures\TestExtension;
 
 class ExtensionRegistryTest extends TestCase
 {
-    public function testRegistration ()
+    public function testRegistration () : void
     {
         $extension = new TestExtension();
         $registry = new ExtensionRegistry();
@@ -20,19 +21,19 @@ class ExtensionRegistryTest extends TestCase
     }
 
 
-    public function testConstructorInjection ()
+    public function testConstructorInjection () : void
     {
         $extension = new TestExtension();
         $registry = new ExtensionRegistry([$extension]);
+
         self::assertSame($extension, $registry->getExtension("test"));
     }
 
 
-    /**
-     * @expectedException Becklyn\Mobiledoc\Exception\DuplicateExtensionMobiledocException
-     */
-    public function testDuplicateRegistration ()
+    public function testDuplicateRegistration () : void
     {
+        $this->expectException(DuplicateExtensionMobiledocException::class);
+
         $extension = new TestExtension();
         $registry = new ExtensionRegistry();
 
