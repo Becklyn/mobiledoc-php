@@ -4,7 +4,6 @@ namespace Becklyn\Mobiledoc\Mobiledoc\Structure\Marker;
 
 use Becklyn\Mobiledoc\Mobiledoc\Structure\ContentElement;
 
-
 abstract class Marker implements ContentElement
 {
     /**
@@ -27,9 +26,6 @@ abstract class Marker implements ContentElement
 
     /**
      *
-     * @param string $text
-     * @param array  $openingTags
-     * @param int    $closingTags
      */
     public function __construct (string $text, array $openingTags = [], int $closingTags = 0)
     {
@@ -49,7 +45,6 @@ abstract class Marker implements ContentElement
 
 
     /**
-     * @return int
      */
     public function getClosingTags () : int
     {
@@ -58,7 +53,6 @@ abstract class Marker implements ContentElement
 
 
     /**
-     * @return string
      */
     public function getText () : string
     {
@@ -80,15 +74,14 @@ abstract class Marker implements ContentElement
      */
     public function addClosingTag () : void
     {
-        $this->closingTags += 1;
+        ++$this->closingTags;
     }
 
 
     /**
-     * @return bool
      */
     public function isEmpty () : bool
     {
-        return "" === trim($this->text);
+        return "" === \trim($this->text);
     }
 }

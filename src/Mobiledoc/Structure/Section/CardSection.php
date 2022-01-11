@@ -2,7 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Mobiledoc\Structure\Section;
 
-
 class CardSection implements Section
 {
     /**
@@ -18,8 +17,6 @@ class CardSection implements Section
 
 
     /**
-     * @param string $name
-     * @param array  $payload
      */
     public function __construct (string $name, array $payload = [])
     {
@@ -29,7 +26,6 @@ class CardSection implements Section
 
 
     /**
-     * @return string
      */
     public function getName () : string
     {
@@ -38,7 +34,6 @@ class CardSection implements Section
 
 
     /**
-     * @return array
      */
     public function getPayload () : array
     {

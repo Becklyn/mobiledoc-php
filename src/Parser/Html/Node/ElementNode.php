@@ -2,7 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Parser\Html\Node;
 
-
 class ElementNode implements HtmlNode
 {
     /**
@@ -12,7 +11,6 @@ class ElementNode implements HtmlNode
 
 
     /**
-     * @param \DOMElement $element
      */
     public function __construct (\DOMElement $element)
     {
@@ -21,7 +19,6 @@ class ElementNode implements HtmlNode
 
 
     /**
-     * @return \DOMElement
      */
     public function getElement () : \DOMElement
     {
@@ -30,7 +27,6 @@ class ElementNode implements HtmlNode
 
 
     /**
-     * @return string
      */
     public function getTagName () : string
     {
@@ -48,7 +44,6 @@ class ElementNode implements HtmlNode
 
 
     /**
-     * @param bool $stripEmptyTextNodes
      * @return HtmlNode[]
      */
     public function getChildrenWithoutWhitespace () : array
@@ -67,8 +62,6 @@ class ElementNode implements HtmlNode
 
 
     /**
-     * @param string $name
-     * @return string
      */
     public function getAttribute (string $name) : string
     {

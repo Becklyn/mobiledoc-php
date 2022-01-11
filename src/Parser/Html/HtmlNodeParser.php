@@ -8,7 +8,6 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 use Becklyn\Mobiledoc\Parser\Html\ElementParser\ElementParserInterface;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 
-
 class HtmlNodeParser
 {
     /**
@@ -18,7 +17,6 @@ class HtmlNodeParser
 
 
     /**
-     * @param array $parsers
      */
     public function __construct (array $parsers)
     {
@@ -30,16 +28,14 @@ class HtmlNodeParser
 
 
     /**
-     * @param ElementParserInterface $parser
      */
-    private function registerParser (ElementParserInterface $parser)
+    private function registerParser (ElementParserInterface $parser) : void
     {
         $this->parsers[] = $parser;
     }
 
 
     /**
-     * @param HtmlNode $node
      * @return ContentElement[]
      */
     public function parse (HtmlNode $node) : array
@@ -57,8 +53,8 @@ class HtmlNodeParser
 
 
     /**
-     * @param HtmlNode      $node
-     * @param HtmlNode|null $context    optional: the context of the node
+     * @param HtmlNode|null $context optional: the context of the node
+     *
      * @return Marker[]
      */
     public function parseInline (HtmlNode $node, ?HtmlNode $context = null) : array

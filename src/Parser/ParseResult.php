@@ -2,7 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Parser;
 
-
 class ParseResult
 {
     /**
@@ -18,8 +17,6 @@ class ParseResult
 
 
     /**
-     * @param array|null $mobiledoc
-     * @param array      $logMessages
      */
     public function __construct (?array $mobiledoc, array $logMessages)
     {
@@ -29,7 +26,6 @@ class ParseResult
 
 
     /**
-     * @return array|null
      */
     public function getMobiledoc () : ?array
     {
@@ -38,7 +34,6 @@ class ParseResult
 
 
     /**
-     * @return array
      */
     public function getLogMessages () : array
     {

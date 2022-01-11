@@ -7,7 +7,6 @@ use Becklyn\Mobiledoc\Parser\Html\HtmlNodeParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\TextNode;
 
-
 /**
  * Parses text nodes
  */

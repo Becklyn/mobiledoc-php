@@ -2,14 +2,13 @@
 
 namespace Becklyn\Mobiledoc\Mobiledoc;
 
-
 class MobiledocConstants
 {
-    const TEXT_MARKER = 0;
-    const ATOM_MARKER = 1;
+    public const TEXT_MARKER = 0;
+    public const ATOM_MARKER = 1;
 
-    const MARKUP_SECTION = 1;
-    const IMAGE_SECTION = 2;
-    const LIST_SECTION = 3;
-    const CARD_SECTION = 10;
+    public const MARKUP_SECTION = 1;
+    public const IMAGE_SECTION = 2;
+    public const LIST_SECTION = 3;
+    public const CARD_SECTION = 10;
 }

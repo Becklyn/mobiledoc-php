@@ -5,7 +5,6 @@ namespace Becklyn\Mobiledoc\Renderer;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
 use Becklyn\Mobiledoc\Renderer\Markup\MarkupAttributesVisitor;
 
-
 class MobiledocRenderer
 {
     /**
@@ -21,7 +20,6 @@ class MobiledocRenderer
 
 
     /**
-     * @param ExtensionRegistry         $extensionRegistry
      * @param MarkupAttributesVisitor[] $markupAttributesVisitors
      */
     public function __construct (ExtensionRegistry $extensionRegistry, array $markupAttributesVisitors = [])
@@ -36,9 +34,8 @@ class MobiledocRenderer
 
 
     /**
-     * @param MarkupAttributesVisitor $visitor
      */
-    public function registerMarkupAttributesVisitor (MarkupAttributesVisitor $visitor)
+    public function registerMarkupAttributesVisitor (MarkupAttributesVisitor $visitor) : void
     {
         $this->markupAttributesVisitor[] = $visitor;
     }
@@ -46,9 +43,6 @@ class MobiledocRenderer
 
     /**
      * Renders the given mobiledoc to a document
-     *
-     * @param array|null $mobiledoc
-     * @return string|null
      */
     public function render (?array $mobiledoc) : ?string
     {

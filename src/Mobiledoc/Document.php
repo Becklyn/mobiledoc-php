@@ -6,7 +6,6 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\MarkupSection;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 
-
 class Document
 {
     /**
@@ -21,9 +20,8 @@ class Document
     private $lastAutomaticallyCreatedSection;
 
     /**
-     * @param Section $section
      */
-    public function appendSection (Section $section)
+    public function appendSection (Section $section) : void
     {
         $this->sections[] = $section;
         // reset the automatically created section
@@ -32,7 +30,6 @@ class Document
 
 
     /**
-     * @param Marker $marker
      */
     public function appendToLastParagraph (Marker $marker) : void
     {

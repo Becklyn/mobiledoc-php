@@ -9,7 +9,6 @@ use Becklyn\Mobiledoc\Parser\Html\HtmlNodeParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\ElementNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 
-
 class ListParser implements ElementParserInterface
 {
     /**
@@ -31,8 +30,6 @@ class ListParser implements ElementParserInterface
 
 
     /**
-     * @param HtmlNode       $node
-     * @param HtmlNodeParser $nodeParser
      * @return Marker[]
      */
     private function parseListItem (HtmlNode $node, HtmlNodeParser $nodeParser) : array
@@ -55,7 +52,7 @@ class ListParser implements ElementParserInterface
         $firstChild = $children[0] ?? null;
 
         // if the only child is a single '<p>'
-        if (count($children) === 1 && $firstChild instanceof ElementNode && "p" === $firstChild->getTagName())
+        if (1 === \count($children) && $firstChild instanceof ElementNode && "p" === $firstChild->getTagName())
         {
             foreach ($firstChild->getChildren() as $child)
             {

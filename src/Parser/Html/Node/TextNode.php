@@ -2,7 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Parser\Html\Node;
 
-
 class TextNode implements HtmlNode
 {
     /**
@@ -12,7 +11,6 @@ class TextNode implements HtmlNode
 
 
     /**
-     * @param \DOMText $node
      */
     public function __construct (\DOMText $node)
     {
@@ -21,7 +19,6 @@ class TextNode implements HtmlNode
 
 
     /**
-     * @param string $text
      */
     public function appendText (string $text) : void
     {
@@ -30,7 +27,6 @@ class TextNode implements HtmlNode
 
 
     /**
-     * @return string
      */
     public function getText () : string
     {

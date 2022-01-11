@@ -20,7 +20,6 @@ use Becklyn\Mobiledoc\Parser\ParseLogger;
 use Becklyn\Mobiledoc\Parser\ParseResult;
 use Masterminds\HTML5;
 
-
 class HtmlParser
 {
     /**
@@ -51,9 +50,7 @@ class HtmlParser
 
 
     /**
-     * @param string           $html
      * @param HtmlNodeParser[] $additionalParsers
-     * @param bool             $verboseErrors
      */
     public function __construct (string $html, array $additionalParsers = [], bool $verboseErrors = false)
     {
@@ -125,8 +122,6 @@ class HtmlParser
 
     /**
      * Parses the root node
-     *
-     * @param \DOMElement $root
      */
     private function parseRoot (\DOMElement $root) : void
     {
@@ -139,7 +134,7 @@ class HtmlParser
      *
      * @param HtmlNode[] $nodes
      */
-    private function parseTopLevel (array $nodes)
+    private function parseTopLevel (array $nodes) : void
     {
         foreach ($nodes as $node)
         {
@@ -153,7 +148,7 @@ class HtmlParser
                 {
                     $this->mobiledoc->appendToLastParagraph($contentElement);
                 }
-                else if ($contentElement instanceof Section)
+                elseif ($contentElement instanceof Section)
                 {
                     $this->mobiledoc->appendSection($contentElement);
                 }
@@ -167,7 +162,6 @@ class HtmlParser
 
 
     /**
-     * @return ParseResult
      */
     public function getResult () : ParseResult
     {

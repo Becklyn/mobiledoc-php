@@ -6,7 +6,6 @@ use Becklyn\Mobiledoc\Parser\Html\HtmlNodeParser;
 use Becklyn\Mobiledoc\Parser\Html\Node\ElementNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 
-
 /**
  * A <span> is just compiled away and is completely replaced with its children
  */

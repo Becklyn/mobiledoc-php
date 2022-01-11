@@ -7,5 +7,4 @@ namespace Becklyn\Mobiledoc\Mobiledoc\Structure;
  */
 interface ContentElement
 {
-
 }

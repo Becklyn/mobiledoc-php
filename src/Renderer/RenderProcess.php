@@ -2,10 +2,9 @@
 
 namespace Becklyn\Mobiledoc\Renderer;
 
-use Becklyn\Mobiledoc\Mobiledoc\MobiledocConstants;
 use Becklyn\Mobiledoc\Extension\ExtensionRegistry;
+use Becklyn\Mobiledoc\Mobiledoc\MobiledocConstants;
 use Becklyn\Mobiledoc\Renderer\Markup\MarkupAttributesVisitor;
-
 
 /**
  * Renders a mobiledoc
@@ -43,8 +42,6 @@ class RenderProcess
 
 
     /**
-     * @param array                     $mobiledoc
-     * @param ExtensionRegistry         $extensionRegistry
      * @param MarkupAttributesVisitor[] $markupAttributesVisitors
      */
     public function __construct (array $mobiledoc, ExtensionRegistry $extensionRegistry, array $markupAttributesVisitors = [])
@@ -93,10 +90,6 @@ class RenderProcess
 
     /**
      * Renders a text section
-     *
-     * @param string $tagName
-     * @param array  $markers
-     * @return string
      */
     private function renderTextSection (string $tagName, array $markers) : string
     {
@@ -109,8 +102,6 @@ class RenderProcess
 
 
     /**
-     * @param string $src
-     * @return string
      */
     private function renderImageSection (string $src) : string
     {
@@ -120,10 +111,6 @@ class RenderProcess
 
     /**
      * Renders a list
-     *
-     * @param string $tagName
-     * @param array  $listElements
-     * @return string
      */
     private function renderListSection (string $tagName, array $listElements) : string
     {
@@ -140,10 +127,6 @@ class RenderProcess
 
     /**
      * Renders a card
-     *
-     * @param int $cardIndex
-     *
-     * @return string
      */
     private function renderCardSection (int $cardIndex) : string
     {
@@ -158,9 +141,6 @@ class RenderProcess
 
     /**
      * Renders a list of markers
-     *
-     * @param array $markers
-     * @return string
      */
     private function renderMarkers (array $markers) : string
     {
@@ -186,11 +166,6 @@ class RenderProcess
 
     /**
      * Renders a text marker
-     *
-     * @param array  $openMarkupIndexes
-     * @param int    $numberOfClosedMarkups
-     * @param string $text
-     * @return string
      */
     private function renderTextMarker (array $openMarkupIndexes, int $numberOfClosedMarkups, string $text) : string
     {
@@ -200,11 +175,6 @@ class RenderProcess
 
     /**
      * Renders an atom marker
-     *
-     * @param array $openMarkupIndexes
-     * @param int   $numberOfClosedMarkups
-     * @param int   $atomIndex
-     * @return string
      */
     private function renderAtomMarker (array $openMarkupIndexes, int $numberOfClosedMarkups, int $atomIndex) : string
     {
@@ -221,11 +191,6 @@ class RenderProcess
 
     /**
      * Wraps the given text correctly with the markup
-     *
-     * @param array  $openMarkupIndexes
-     * @param int    $numberOfClosedMarkups
-     * @param string $text
-     * @return string
      */
     private function wrapTextWithMarker (array $openMarkupIndexes, int $numberOfClosedMarkups, string $text) : string
     {
@@ -239,7 +204,7 @@ class RenderProcess
             $this->markupStack[] = $openingMarkup[0];
         }
 
-        for ($i = 0; $i < $numberOfClosedMarkups; $i++)
+        for ($i = 0; $i < $numberOfClosedMarkups; ++$i)
         {
             $closingTag = \array_pop($this->markupStack);
             $closingTags[] = "</{$closingTag}>";
@@ -251,9 +216,6 @@ class RenderProcess
 
     /**
      * Renders an opening markup tag
-     *
-     * @param array $markup
-     * @return string
      */
     private function renderOpeningMarkup (array $markup) : string
     {
@@ -284,13 +246,13 @@ class RenderProcess
         foreach ($attributes as $key => $value)
         {
             // skip `false` and `null` attributes
-            if ($value === false || $value === null)
+            if (false === $value || null === $value)
             {
                 continue;
             }
 
             // for `true` attributes, just use the key
-            if ($value === true)
+            if (true === $value)
             {
                 $renderedAttributes[] = $key;
                 continue;
@@ -305,12 +267,11 @@ class RenderProcess
             $renderedAttributes[] = $key . '="' . \htmlspecialchars((string) $value, \ENT_QUOTES) . '"';
         }
 
-        return "<{$tagName} " . \implode(" ", $renderedAttributes) .  ">";
+        return "<{$tagName} " . \implode(" ", $renderedAttributes) . ">";
     }
 
 
     /**
-     * @return string|null
      */
     public function getHtml () : ?string
     {
@@ -322,16 +283,13 @@ class RenderProcess
      * Parses the flat attribute list into a structured attribute map.
      *
      * If there are duplicate keys in the list, the last one will overwrite all previous ones in the map.
-     *
-     * @param array $attributes
-     * @return array
      */
     private function parseFlatAttributes (array $attributes) : array
     {
         $numberOfEntries = \floor(\count($attributes) / 2);
         $structured = [];
 
-        for ($i = 0; $i < $numberOfEntries; $i++)
+        for ($i = 0; $i < $numberOfEntries; ++$i)
         {
             $key = $attributes[$i * 2];
             $value = $attributes[($i * 2) + 1];
@@ -340,7 +298,8 @@ class RenderProcess
 
         // if the array has an odd number of entries, just add the last remaining key with `null` as value
         $lastIndex = \count($attributes) - 1;
-        if ($lastIndex % 2 === 0)
+
+        if (0 === $lastIndex % 2)
         {
             $structured[$attributes[$lastIndex]] = null;
         }

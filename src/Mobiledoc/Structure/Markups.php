@@ -2,14 +2,11 @@
 
 namespace Becklyn\Mobiledoc\Mobiledoc\Structure;
 
-
 class Markups
 {
     private $markups = [];
 
     /**
-     * @param array $tags
-     * @return array
      */
     public function transformTagsToIndexes (array $tags) : array
     {
@@ -32,7 +29,6 @@ class Markups
     }
 
     /**
-     * @return array
      */
     public function serialize () : array
     {

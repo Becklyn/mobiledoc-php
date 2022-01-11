@@ -2,18 +2,14 @@
 
 namespace Becklyn\Mobiledoc\Parser\Html\Node;
 
-
 use Becklyn\Mobiledoc\Exception\ParseException;
-
 
 class NodeTraverser
 {
-    const PRESERVE_WHITSPACE_TEXT_NODES = false;
-    const STRIP_WHITSPACE_TEXT_NODES = true;
+    public const PRESERVE_WHITSPACE_TEXT_NODES = false;
+    public const STRIP_WHITSPACE_TEXT_NODES = true;
 
     /**
-     * @param \DOMNode $node
-     * @param bool     $stripEmptyTextNodes
      * @return HtmlNode[]
      */
     public static function getSanitizedChildren (\DOMNode $node, bool $stripEmptyTextNodes = self::PRESERVE_WHITSPACE_TEXT_NODES) : array
@@ -30,7 +26,7 @@ class NodeTraverser
 
             if ($child instanceof \DOMText)
             {
-                if ($stripEmptyTextNodes && "" === trim($child->textContent))
+                if ($stripEmptyTextNodes && "" === \trim($child->textContent))
                 {
                     continue;
                 }

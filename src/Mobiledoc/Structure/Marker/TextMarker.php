@@ -2,9 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Mobiledoc\Structure\Marker;
 
-
-
 class TextMarker extends Marker
 {
-
 }

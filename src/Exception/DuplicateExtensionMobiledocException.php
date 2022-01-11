@@ -2,14 +2,11 @@
 
 namespace Becklyn\Mobiledoc\Exception;
 
-
 class DuplicateExtensionMobiledocException extends MobiledocException
 {
     /**
-     * @param string          $name
-     * @param \Throwable|null $previous
      */
-    public function __construct (string $name, \Throwable $previous = null)
+    public function __construct (string $name, ?\Throwable $previous = null)
     {
         parent::__construct(
             \sprintf("Can't register multiple extensions with same name '%s'.", $name),

@@ -2,7 +2,6 @@
 
 namespace Becklyn\Mobiledoc\Renderer\Markup;
 
-
 interface MarkupAttributesVisitor
 {
     /**
@@ -15,10 +14,6 @@ interface MarkupAttributesVisitor
      *
      * The $attributes array is a structured map of [key => value].
      * If an array is returned, it has to have the exact same structure.
-     *
-     * @param string $tagName
-     * @param array  $attributes
-     * @return array|null
      */
     public function transform (string $tagName, array $attributes) : ?array;
 }

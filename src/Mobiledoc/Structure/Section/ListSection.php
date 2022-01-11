@@ -4,7 +4,6 @@ namespace Becklyn\Mobiledoc\Mobiledoc\Structure\Section;
 
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 
-
 class ListSection implements Section
 {
     /**
@@ -37,7 +36,6 @@ class ListSection implements Section
 
 
     /**
-     * @return string
      */
     public function getTagName () : string
     {
@@ -55,7 +53,6 @@ class ListSection implements Section
 
 
     /**
-     * @return array
      */
     public function getListItems () : array
     {

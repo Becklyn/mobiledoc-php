@@ -4,7 +4,6 @@ namespace Becklyn\Mobiledoc\Mobiledoc\Structure\Section;
 
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Marker\Marker;
 
-
 class MarkupSection implements Section
 {
     /**
@@ -20,7 +19,6 @@ class MarkupSection implements Section
 
 
     /**
-     * @param string $tagName
      */
     public function __construct (string $tagName)
     {
@@ -29,7 +27,6 @@ class MarkupSection implements Section
 
 
     /**
-     * @param Marker $marker
      */
     public function append (Marker $marker) : void
     {
@@ -38,7 +35,6 @@ class MarkupSection implements Section
 
 
     /**
-     * @return bool
      */
     public function isParagraph () : bool
     {
@@ -47,7 +43,6 @@ class MarkupSection implements Section
 
 
     /**
-     * @return string
      */
     public function getTagName () : string
     {

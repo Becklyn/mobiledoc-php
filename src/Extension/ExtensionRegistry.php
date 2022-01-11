@@ -4,7 +4,6 @@ namespace Becklyn\Mobiledoc\Extension;
 
 use Becklyn\Mobiledoc\Exception\DuplicateExtensionMobiledocException;
 
-
 /**
  * Holds all extensions
  */
@@ -29,7 +28,6 @@ class ExtensionRegistry
 
 
     /**
-     * @param RichTextExtensionInterface $extension
      */
     public function registerExtension (RichTextExtensionInterface $extension) : void
     {
@@ -45,8 +43,6 @@ class ExtensionRegistry
 
 
     /**
-     * @param string $name
-     * @return RichTextExtensionInterface|null
      */
     public function getExtension (string $name) : ?RichTextExtensionInterface
     {

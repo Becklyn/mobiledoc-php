@@ -2,10 +2,8 @@
 
 namespace Becklyn\Mobiledoc\Exception;
 
-
 use Becklyn\Mobiledoc\Parser\Html\Node\ElementNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
-
 
 class ParseException extends MobiledocException
 {
@@ -16,10 +14,7 @@ class ParseException extends MobiledocException
 
 
     /**
-     *
-     * @param string                    $message
-     * @param null|HtmlNode|\DOMNode    $node
-     * @param \Throwable|null $throwable
+     * @param HtmlNode|\DOMNode|null $node
      */
     public function __construct (string $message, $node = null, ?\Throwable $throwable = null)
     {
@@ -30,7 +25,6 @@ class ParseException extends MobiledocException
 
 
     /**
-     * @return string
      */
     public function getFullMessage () : string
     {

@@ -9,7 +9,6 @@ use Becklyn\Mobiledoc\Parser\Html\Node\ElementNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\HtmlNode;
 use Becklyn\Mobiledoc\Parser\Html\Node\TextNode;
 
-
 class InlineParser implements ElementParserInterface
 {
     private const VALID_TAG_NAMES = [
@@ -69,9 +68,6 @@ class InlineParser implements ElementParserInterface
 
     /**
      * Returns the markup parameters for the given element
-     *
-     * @param ElementNode $element
-     * @return array
      */
     private function getElementMarkupParameters (ElementNode $element) : array
     {

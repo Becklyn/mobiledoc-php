@@ -9,7 +9,6 @@ use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\ListSection;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\MarkupSection;
 use Becklyn\Mobiledoc\Mobiledoc\Structure\Section\Section;
 
-
 /**
  * Serializes a mobiledoc document
  */
@@ -32,8 +31,6 @@ class DocumentSerializer
 
 
     /**
-     * @param array $list
-     * @return array
      */
     private function serializeList (array $list) : array
     {
@@ -50,13 +47,12 @@ class DocumentSerializer
 
     /**
      * @param object $entry
-     * @return array
      */
     private function serializeEntry ($entry) : array
     {
         if (!\is_object($entry))
         {
-            throw new \InvalidArgumentException(sprintf("Can't serialize non-object, %s given.", \gettype($entry)));
+            throw new \InvalidArgumentException(\sprintf("Can't serialize non-object, %s given.", \gettype($entry)));
         }
 
         switch (true)
@@ -77,15 +73,12 @@ class DocumentSerializer
                 return $this->serializeAtomMarker($entry);
         }
 
-        throw new \InvalidArgumentException(sprintf("Can't serialize value of type '%s'.", \get_class($entry)));
+        throw new \InvalidArgumentException(\sprintf("Can't serialize value of type '%s'.", \get_class($entry)));
     }
 
 
     /**
      * Serializes a section: Markup
-     *
-     * @param MarkupSection $section
-     * @return array
      */
     private function serializeMarkupSection (MarkupSection $section) : array
     {
@@ -99,9 +92,6 @@ class DocumentSerializer
 
     /**
      * Serializes a section: List
-     *
-     * @param ListSection $section
-     * @return array
      */
     private function serializeListSection (ListSection $section) : array
     {
@@ -115,9 +105,6 @@ class DocumentSerializer
 
     /**
      * Serializes a section: Card
-     *
-     * @param CardSection $section
-     * @return array
      */
     private function serializeCardSection (CardSection $section) : array
     {
@@ -132,9 +119,6 @@ class DocumentSerializer
 
     /**
      * Serializes a marker: Text
-     *
-     * @param TextMarker $marker
-     * @return array
      */
     private function serializeTextMarker (TextMarker $marker) : array
     {
@@ -149,9 +133,6 @@ class DocumentSerializer
 
     /**
      * Serializes a marker: Atom
-     *
-     * @param AtomMarker $marker
-     * @return array
      */
     private function serializeAtomMarker (AtomMarker $marker) : array
     {
@@ -170,7 +151,6 @@ class DocumentSerializer
      * Transforms opening tag names to markup indexes
      *
      * @param array[] $openingTags
-     * @return array
      */
     private function transformOpeningTagsToMarkupIndexes (array $openingTags) : array
     {
@@ -207,9 +187,6 @@ class DocumentSerializer
 
     /**
      * Adds the atom and returns the index for it
-     *
-     * @param AtomMarker $atom
-     * @return int
      */
     private function addAtom (AtomMarker $atom) : int
     {
@@ -226,9 +203,6 @@ class DocumentSerializer
 
     /**
      * Adds the card and returns the index for it
-     *
-     * @param CardSection $card
-     * @return int
      */
     private function addCard (CardSection $card) : int
     {
@@ -244,9 +218,6 @@ class DocumentSerializer
 
     /**
      * Serialize the markups list
-     *
-     * @param array $markups
-     * @return array
      */
     private function serializeMarkups (array $markups) : array
     {
@@ -264,6 +235,7 @@ class DocumentSerializer
             }
 
             $serializesParameters = [];
+
             foreach ($parameters as $name => $value)
             {
                 $serializesParameters[] = $name;
@@ -278,7 +250,6 @@ class DocumentSerializer
 
 
     /**
-     * @return array
      */
     public function serialize () : array
     {
