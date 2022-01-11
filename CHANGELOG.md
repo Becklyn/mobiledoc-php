@@ -2,6 +2,7 @@
 =====
 
 *   (improvement) Add support for PHP 8.0.
+*   (internal) Replace TravisCI with GitHub Actions.
 
 
 2.0.1
