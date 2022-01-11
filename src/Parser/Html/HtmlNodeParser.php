@@ -73,6 +73,8 @@ class HtmlNodeParser
             }
         }
 
+        /** @var Marker[] $result */
+
         return $result;
     }
 }

@@ -60,9 +60,6 @@ abstract class Marker implements ContentElement
     }
 
 
-    /**
-     * @param array $tag
-     */
     public function prependOpeningTag (string $tag, array $parameters = []) : void
     {
         \array_unshift($this->openingTags, [$tag, $parameters]);
