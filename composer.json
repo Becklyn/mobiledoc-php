@@ -16,7 +16,6 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "becklyn/php-cs": "^1.0.9",
         "masterminds/html5": "^2.4"
     },
     "config": {
