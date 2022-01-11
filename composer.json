@@ -20,11 +20,14 @@
         "masterminds/html5": "^2.4"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     },
     "autoload": {
         "psr-4": {
-            "Becklyn\\Mobiledoc\\": ""
+            "Becklyn\\Mobiledoc\\": "src"
         }
     },
     "autoload-dev": {
